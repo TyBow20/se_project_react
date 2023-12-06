@@ -1,0 +1,35 @@
+.header {
+  /* background-color: darkcyan; */
+  width: 1360px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60px;
+  margin-left: 40px;
+  margin-top: 32px;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  /* width: 89px;
+    height: 40px; */
+  gap: 20px;
+}
+
+.header__avatar-logo {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  /* width: 40px;
+    height: 40px; */
+}
+
+.header__location {
+  font-weight: 700;
+}
+
+.header__name {
+  font-weight: 700;
+}
