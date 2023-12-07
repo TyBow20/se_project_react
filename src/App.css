@@ -14,6 +14,17 @@
 
 .main {
   width: 1440px;
-  height: 823px;
+  height: 822px;
   background-color: burlywood;
+}
+
+.card__section {
+  display: flex;
+  /* flex-wrap: wrap; */
+  margin-left: 40px;
+  gap: 20px;
+}
+
+.card__name {
+  text-align: center;
 }
