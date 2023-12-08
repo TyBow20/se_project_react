@@ -19,12 +19,32 @@
 }
 
 .card__section {
-  display: flex;
-  /* flex-wrap: wrap; */
   margin-left: 40px;
-  gap: 20px;
 }
 
 .card__name {
   text-align: center;
+}
+
+.card__image {
+  width: 328px;
+  height: 328px;
+  border-radius: 20px;
+  outline: #0000004d 1px solid;
+}
+
+.card__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 17px;
+  margin-top: 30px;
+}
+
+.footer {
+  width: 1358px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 40px;
+  margin-top: 50px;
 }
