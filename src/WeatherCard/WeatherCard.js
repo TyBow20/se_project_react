@@ -1,3 +1,5 @@
+import "./WeatherCard.css";
+
 const weatherStatus = [
   { url: require("../images/day/sunny.svg").default, day: true, type: "sunny" },
   {
@@ -19,7 +21,7 @@ const WeatherCard = ({ day, type, weatherTemp = "" }) => {
   const imageSrcUrl = imgSrc[0].url || "";
   return (
     <section className="weather" id="weather">
-      <div className="weather__info">{weatherTemp}</div>
+      <div className="weather__info">{weatherTemp}°F</div>
       <img src={imageSrcUrl} className="weather__image" />
     </section>
   );

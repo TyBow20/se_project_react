@@ -1,0 +1,16 @@
+.main {
+  width: 1440px;
+  height: 822px;
+  background-color: burlywood;
+}
+
+.card__section {
+  margin-left: 40px;
+}
+
+.card__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 17px;
+  margin-top: 30px;
+}

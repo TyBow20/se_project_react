@@ -1,6 +1,6 @@
 import "./Header.css";
 
-const Header = () => {
+const Header = ({ onCreateModal }) => {
   return (
     <div>
       <header className="header">
@@ -12,7 +12,14 @@ const Header = () => {
         </div>
         <div className="header__avatar-logo">
           <div>
-            <button type="text"> + Add New Clothes</button>
+            <button
+              className="header__newclothes"
+              onClick={onCreateModal}
+              type="text"
+            >
+              {" "}
+              + Add clothes
+            </button>
           </div>
           <div className="header__name">Terrence Tegegne</div>
           <div>

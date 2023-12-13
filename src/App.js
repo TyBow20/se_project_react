@@ -1,57 +1,76 @@
 // import logo from "./logo.svg";
 import "./App.css";
 import Header from "./Header/Header";
-// import WeatherCard from "./WeatherCard.js/WeatherCard";
-// import ItemCard from "./ItemCard/ItemCard";
 import Main from "./Main/Main";
 import Footer from "./Footer/Footer";
-
-// const defaultClothingItems = [
-//   {
-//     _id: 0,
-//     name: "Cap",
-//     weather: "hot",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591",
-//   },
-//   {
-//     _id: 1,
-//     name: "Hoodie",
-//     weather: "warm",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
-//   },
-//   {
-//     _id: 2,
-//     name: "Jacket",
-//     weather: "cold",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
-//   },
-//   {
-//     _id: 3,
-//     name: "Sneakers",
-//     weather: "cold",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
-//   },
-//   {
-//     _id: 4,
-//     name: "T-Shirt",
-//     weather: "hot",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09",
-//   },
-//   {
-//     _id: 5,
-//     name: "Winter coat",
-//     weather: "cold",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
-//   },
-// ];
+import ModalWithForm from "./ModalWithForm/ModalWIthForm";
+import { useState, useEffect } from "react";
+import ItemModal from "./ItemModal/ItemModal";
+import { getForecastWeather, parseWeatherData } from "./utils/WeatherApi";
 
 function App() {
   const weatherTemp = "75° F";
+  const [activeModal, setActiveModal] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
+  const [temp, setTemp] = useState(0);
+
+  const handleCreateModal = () => {
+    setActiveModal("create");
+  };
+
+  const handleCloseModal = () => {
+    setActiveModal("");
+  };
+
+  const handleSeleectedCard = (card) => {
+    setActiveModal("preview");
+    setSelectedCard(card);
+  };
+
+  useEffect(() => {
+    getForecastWeather().then((data) => {
+      const temperature = parseWeatherData(data);
+      setTemp(temperature);
+    });
+  }, []);
+  console.log(temp);
+
   return (
     <div>
-      <Header />
-      <Main weatherTemp={weatherTemp} />
+      <Header onCreateModal={handleCreateModal} />
+      <Main weatherTemp={temp} onSelectedCard={handleSeleectedCard} />
       <Footer />
+      {activeModal === "create" && (
+        <ModalWithForm title="New Garment" onClose={handleCloseModal}>
+          {/* These are the children */}
+          <label>
+            Name
+            <input type="text" name="name" minLength="1" maxlength="30" />
+          </label>
+          <label>
+            Image
+            <input type="url" name="link" minLength="1" maxlength="30" />
+          </label>
+          <p>Select the weather type:</p>
+          <div>
+            <div>
+              <input type="radio" id="hot" value="hot" />
+              <label>Hot</label>
+            </div>
+            <div>
+              <input type="radio" id="warm" value="warm" />
+              <label>Warm</label>
+            </div>
+            <div>
+              <input type="radio" id="cold" value="cold" />
+              <label>Cold</label>
+            </div>
+          </div>
+        </ModalWithForm>
+      )}
+      {activeModal === "preview" && (
+        <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+      )}
     </div>
   );
 }
