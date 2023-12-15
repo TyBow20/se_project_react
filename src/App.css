@@ -49,3 +49,7 @@
   font-family: "Cabinet", sans-serif;
   font-weight: 700;
 }
+
+.modal__type_new-garment > .modal__content {
+  padding: 20px;
+}

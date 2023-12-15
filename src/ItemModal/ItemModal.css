@@ -1,15 +1,11 @@
 .modal__card_image {
-  width: 100%; /* Makes the image responsive */
-  height: auto; /* Maintains the aspect ratio */
-  max-height: 610px; /* Max height from your image */
+  /* width: 100%;
+  height: auto;
+  max-height: 610px; */
+  object-fit: cover;
+  max-width: 100%;
 }
 
 .modal__content > div {
-  margin-top: 20px; /* Adds space between the image and text */
-}
-
-.modal__card_image {
-  width: 100%; /* Makes the image responsive */
-  height: auto; /* Maintains the aspect ratio */
-  max-height: 610px; /* Max height from your image */
+  margin-top: 20px;
 }

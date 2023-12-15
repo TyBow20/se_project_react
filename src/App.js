@@ -43,6 +43,7 @@ function App() {
       <Footer />
       {activeModal === "create" && (
         <ModalWithForm
+          name="new-garment"
           className="modal__container"
           title="New garment"
           onClose={handleCloseModal}

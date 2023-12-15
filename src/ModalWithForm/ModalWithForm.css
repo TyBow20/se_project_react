@@ -15,11 +15,12 @@
   background-color: white;
   max-width: 496px;
   width: 100%;
-  height: 436px;
+  min-height: 436px;
   border-radius: 20px;
   border: 1px;
-  padding-left: 28px;
+  /* padding-left: 28px; */
   box-sizing: border-box;
+  position: relative;
 }
 
 .modal__garment {
@@ -34,17 +35,21 @@
 }
 
 .modal__close {
-  position: relative;
   width: 20px;
   height: 20px;
   top: 20px;
-
-  right: -448px;
+  right: 20px;
   border: none;
   background: none;
   cursor: pointer;
   font-size: 20px;
   color: #0000004d;
+  background: url("../images/Union.svg") center no-repeat;
+  position: absolute;
+}
+
+.modal__close_content_form {
+  background: url("../images/darkx.svg") center no-repeat;
 }
 
 .modal__h3 {
