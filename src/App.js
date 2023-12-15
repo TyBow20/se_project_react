@@ -1,3 +1,4 @@
+// import logo from "..public/favicon.ico";
 // import logo from "./logo.svg";
 import "./App.css";
 import Header from "./Header/Header";
@@ -41,28 +42,51 @@ function App() {
       <Main weatherTemp={temp} onSelectedCard={handleSeleectedCard} />
       <Footer />
       {activeModal === "create" && (
-        <ModalWithForm title="New Garment" onClose={handleCloseModal}>
-          {/* These are the children */}
-          <label>
-            Name
-            <input type="text" name="name" minLength="1" maxlength="30" />
-          </label>
-          <label>
-            Image
-            <input type="url" name="link" minLength="1" maxlength="30" />
-          </label>
-          <p>Select the weather type:</p>
+        <ModalWithForm
+          className="modal__container"
+          title="New garment"
+          onClose={handleCloseModal}
+        >
           <div>
+            <label className="modal__name">
+              <b>Name</b>
+              <input
+                className="modal__text"
+                type="text"
+                name="name"
+                minLength="1"
+                maxlength="30"
+                placeholder="Name"
+              />
+            </label>
+          </div>
+          <div>
+            <label className="modal__link">
+              <b>Image</b>
+              <input
+                className="modal__url"
+                type="url"
+                name="link"
+                minLength="1"
+                maxlength="30"
+                placeholder="Image URL"
+              />
+            </label>
+          </div>
+          <p>
+            <b>Select the weather type:</b>
+          </p>
+          <div className="modal__radio">
             <div>
-              <input type="radio" id="hot" value="hot" />
+              <input type="radio" id="hot" value="hot" name="weather" />
               <label>Hot</label>
             </div>
             <div>
-              <input type="radio" id="warm" value="warm" />
+              <input type="radio" id="warm" value="warm" name="weather" />
               <label>Warm</label>
             </div>
             <div>
-              <input type="radio" id="cold" value="cold" />
+              <input type="radio" id="cold" value="cold" name="weather" />
               <label>Cold</label>
             </div>
           </div>

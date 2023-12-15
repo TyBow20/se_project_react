@@ -18,7 +18,8 @@
   height: 436px;
   border-radius: 20px;
   border: 1px;
-  padding-left: 34px;
+  padding-left: 28px;
+  box-sizing: border-box;
 }
 
 .modal__garment {
@@ -27,4 +28,39 @@
   border-radius: 4px;
   background-color: #0000004d;
   color: white;
+  margin-top: 32px;
+  padding: 8px 16px 8px 16px;
+  cursor: pointer;
 }
+
+.modal__close {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  top: 20px;
+
+  right: -448px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #0000004d;
+}
+
+.modal__h3 {
+  width: 104px;
+  height: 20px;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 24px;
+  margin-top: 0;
+  font-family: "Cabinet", sans-serif;
+}
+
+/* .modal__form {
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+} */

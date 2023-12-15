@@ -26,7 +26,7 @@ function Main({ weatherTemp, onSelectedCard }) {
     <main className="main">
       <WeatherCard day={true} type="snow" weatherTemp={weatherTemp} />
       <section className="card__section" id="card-section">
-        Today is {weatherTemp}/ You may want to wear:
+        Today is {weatherTemp}°F / You may want to wear:
         <div className="card__items">
           {defaultClothingItems.map((item) => (
             <ItemCard item={item} onSelectedCard={onSelectedCard} />

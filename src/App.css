@@ -1,1 +1,51 @@
+.modal__name {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 440px;
+  height: 52px;
+}
 
+.modal__text {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid black;
+  /* margin-right: 30px; */
+  margin-top: 10px;
+  padding: 0;
+}
+
+.modal__link {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  width: 440px;
+  height: 52px;
+}
+
+.modal__url {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid black;
+  /* margin-right: 30px; */
+  margin-top: 10px;
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+.modal__container {
+  margin-top: 0;
+  font-size: 34px;
+}
+
+.modal__radio {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  padding-top: 12px;
+  font-family: "Cabinet", sans-serif;
+  font-weight: 700;
+}

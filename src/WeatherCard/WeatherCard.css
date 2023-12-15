@@ -11,3 +11,7 @@
   color: white;
   font-weight: 700;
 }
+
+.weather__image {
+  margin-bottom: 40px;
+}
