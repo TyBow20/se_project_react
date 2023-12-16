@@ -5,7 +5,7 @@ import Header from "./Header/Header";
 import Main from "./Main/Main";
 import Footer from "./Footer/Footer";
 import ModalWithForm from "./ModalWithForm/ModalWIthForm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ItemModal from "./ItemModal/ItemModal";
 import { getForecastWeather, parseWeatherData } from "./utils/WeatherApi";
 
@@ -28,13 +28,66 @@ function App() {
     setSelectedCard(card);
   };
 
+  // start modal click effect
+
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        handleCloseModal();
+      }
+    };
+
+    const handleEscapeKey = (e) => {
+      if (e.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+
+    if (activeModal) {
+      document.addEventListener("mousedown", handleOutsideClick);
+      document.addEventListener("keydown", handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [activeModal]);
+
+  // const modalRef = useRef(null);
+
+  // useEffect(() => {
+  //   const handleOutsideClick = (event) => {
+  //     if (modalRef.current && !modalRef.current.contains(event.target)) {
+  //       handleCloseModal();
+  //     }
+  //   };
+
+  //   const handleEscapeKey = (event) => {
+  //     if (event.key === "Escape") {
+  //       handleCloseModal();
+  //     }
+  //   };
+
+  //   document.addEventListener("mousedown", handleOutsideClick);
+  //   document.addEventListener("keydown", handleEscapeKey);
+
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleOutsideClick);
+  //     document.removeEventListener("keydown", handleEscapeKey);
+  //   };
+  // }, []);
+
+  // end modal click effect
+
   useEffect(() => {
     getForecastWeather().then((data) => {
       const temperature = parseWeatherData(data);
       setTemp(temperature);
     });
   }, []);
-  console.log(temp);
 
   return (
     <div>
@@ -47,6 +100,7 @@ function App() {
           className="modal__container"
           title="New garment"
           onClose={handleCloseModal}
+          ref={modalRef}
         >
           <div>
             <label className="modal__name">
@@ -56,7 +110,7 @@ function App() {
                 type="text"
                 name="name"
                 minLength="1"
-                maxlength="30"
+                maxLength="30"
                 placeholder="Name"
               />
             </label>
@@ -69,7 +123,7 @@ function App() {
                 type="url"
                 name="link"
                 minLength="1"
-                maxlength="30"
+                maxLength="30"
                 placeholder="Image URL"
               />
             </label>
