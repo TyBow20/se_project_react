@@ -64,10 +64,6 @@
   font-family: "Cabinet", sans-serif;
 }
 
-/* .modal__form {
-  padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-} */
+.modal__form {
+  font-family: "Cabinet", sans-serif;
+}
