@@ -1,3 +1,4 @@
+@import url("./fonts/fonts.css");
 .modal__name {
   display: flex;
   flex-direction: column;

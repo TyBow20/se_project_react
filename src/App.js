@@ -34,7 +34,8 @@ function App() {
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
+      console.log(modalRef.current, e.target);
+      if (e.target.classList.contains("modal")) {
         handleCloseModal();
       }
     };
@@ -46,6 +47,7 @@ function App() {
     };
 
     if (activeModal) {
+      // console.log(modalRef.current, e.target);
       document.addEventListener("mousedown", handleOutsideClick);
       document.addEventListener("keydown", handleEscapeKey);
     }
@@ -148,7 +150,11 @@ function App() {
         </ModalWithForm>
       )}
       {activeModal === "preview" && (
-        <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+        <ItemModal
+          selectedCard={selectedCard}
+          onClose={handleCloseModal}
+          ref={modalRef}
+        />
       )}
     </div>
   );

@@ -10,7 +10,7 @@ const ItemModal = ({ selectedCard, onClose }) => {
         <img className="modal__card_image" src={selectedCard.link} />
         <div className="modal__description">
           <div>{selectedCard.name}</div>
-          <div>weather type: {selectedCard.weather}</div>
+          <div>Weather: {selectedCard.weather}</div>
         </div>
       </div>
     </div>
