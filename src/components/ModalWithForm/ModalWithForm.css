@@ -22,6 +22,7 @@
   /* padding-left: 28px; */
   box-sizing: border-box;
   position: relative;
+  padding: 28px;
   /* height: 610px; */
 }
 
@@ -44,13 +45,13 @@
   cursor: pointer;
   font-size: 20px;
   color: #0000004d;
-  background: url("../images/Union.svg") center no-repeat;
+  background: url("../../images/Union.svg") center no-repeat;
   position: absolute;
   border: none;
 }
 
 .modal__close_content_form {
-  background: url("../images/darkx.svg") center no-repeat;
+  background: url("../../images/darkx.svg") center no-repeat;
   border: none;
 }
 
