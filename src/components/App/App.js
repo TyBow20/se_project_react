@@ -84,11 +84,27 @@ function App() {
 
   // end modal click effect
 
+  // useEffect(() => {
+  //   getForecastWeather().then((data) => {
+  //     const temperature = parseWeatherData(data);
+  //     setTemp(temperature);
+  //   });
+  // }, []);
+
   useEffect(() => {
-    getForecastWeather().then((data) => {
-      const temperature = parseWeatherData(data);
-      setTemp(temperature);
-    });
+    getForecastWeather()
+      .then((data) => {
+        const temperature = parseWeatherData(data);
+        setTemp(temperature);
+        // const weatherDate = new Date(data.date).toLocaleString("default", {
+        //   month: "long",
+        //   day: "numeric",
+        // });
+        // setDate(weatherDate);
+      })
+      .catch((error) => {
+        console.error("Error fetching weather data:", error);
+      });
   }, []);
 
   return (
@@ -102,7 +118,7 @@ function App() {
           className="modal__container"
           title="New garment"
           onClose={handleCloseModal}
-          ref={modalRef}
+          // ref={modalRef}
         >
           <div>
             <label className="modal__name">
@@ -144,7 +160,10 @@ function App() {
             </div>
             <div>
               <input type="radio" id="cold" value="cold" name="weather" />
-              <label>Cold</label>
+              <label>
+                Cold
+                {/* <input type="radio" name="temperature" value="cold" /> */}
+              </label>
             </div>
           </div>
         </ModalWithForm>
@@ -153,7 +172,7 @@ function App() {
         <ItemModal
           selectedCard={selectedCard}
           onClose={handleCloseModal}
-          ref={modalRef}
+          // ref={modalRef}
         />
       )}
     </div>

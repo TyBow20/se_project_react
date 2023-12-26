@@ -36,3 +36,36 @@ export const defaultClothingItems = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
   },
 ];
+
+// export const weatherStatus = [
+//   {
+//     url: require("../images/day/sunny.svg").default, // Path adjusted
+//     day: true,
+//     type: "sunny",
+//   },
+//   {
+//     url: require("../images/day/cloudy.svg").default, // Path adjusted
+//     day: true,
+//     type: "cloudy",
+//   },
+//   {
+//     url: require("../images/day/rain.svg").default, // Path adjusted
+//     day: true,
+//     type: "rain",
+//   },
+//   {
+//     url: require("../images/day/snow.svg").default, // Path adjusted
+//     day: true,
+//     type: "snow",
+//   },
+//   {
+//     url: require("../images/day/storm.svg").default, // Path adjusted
+//     day: true,
+//     type: "storm",
+//   },
+//   {
+//     url: require("../images/day/fog.svg").default, // Path adjusted
+//     day: true,
+//     type: "fog",
+//   },
+// ];
