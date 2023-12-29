@@ -14,6 +14,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [temp, setTemp] = useState(0);
+  const [city, setCity] = useState("");
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -94,13 +95,11 @@ function App() {
   useEffect(() => {
     getForecastWeather()
       .then((data) => {
+        console.log("data", data);
+        const currentCity = data.name;
+        setCity(currentCity);
         const temperature = parseWeatherData(data);
         setTemp(temperature);
-        // const weatherDate = new Date(data.date).toLocaleString("default", {
-        //   month: "long",
-        //   day: "numeric",
-        // });
-        // setDate(weatherDate);
       })
       .catch((error) => {
         console.error("Error fetching weather data:", error);
@@ -109,7 +108,7 @@ function App() {
 
   return (
     <div>
-      <Header onCreateModal={handleCreateModal} />
+      <Header onCreateModal={handleCreateModal} city={city} />
       <Main weatherTemp={temp} onSelectedCard={handleSeleectedCard} />
       <Footer />
       {activeModal === "create" && (

@@ -37,35 +37,35 @@ export const defaultClothingItems = [
   },
 ];
 
-// export const weatherStatus = [
-//   {
-//     url: require("../images/day/sunny.svg").default, // Path adjusted
-//     day: true,
-//     type: "sunny",
-//   },
-//   {
-//     url: require("../images/day/cloudy.svg").default, // Path adjusted
-//     day: true,
-//     type: "cloudy",
-//   },
-//   {
-//     url: require("../images/day/rain.svg").default, // Path adjusted
-//     day: true,
-//     type: "rain",
-//   },
-//   {
-//     url: require("../images/day/snow.svg").default, // Path adjusted
-//     day: true,
-//     type: "snow",
-//   },
-//   {
-//     url: require("../images/day/storm.svg").default, // Path adjusted
-//     day: true,
-//     type: "storm",
-//   },
-//   {
-//     url: require("../images/day/fog.svg").default, // Path adjusted
-//     day: true,
-//     type: "fog",
-//   },
-// ];
+export const weatherStatus = [
+  {
+    url: require("../images/day/sunny.svg").default,
+    day: true,
+    type: "sunny",
+  },
+  {
+    url: require("../images/day/cloudy.svg").default,
+    day: true,
+    type: "cloudy",
+  },
+  {
+    url: require("../images/day/rain.svg").default,
+    day: true,
+    type: "rain",
+  },
+  {
+    url: require("../images/day/snow.svg").default,
+    day: true,
+    type: "snow",
+  },
+  {
+    url: require("../images/day/storm.svg").default,
+    day: true,
+    type: "storm",
+  },
+  {
+    url: require("../images/day/fog.svg").default,
+    day: true,
+    type: "fog",
+  },
+];
