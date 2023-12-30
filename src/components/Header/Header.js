@@ -7,7 +7,7 @@ const Header = ({ onCreateModal, date, city }) => {
     month: "long",
     day: "numeric",
   });
-  console.log("currentDate", currentDate);
+  // console.log("currentDate", currentDate);
   // const city = "New York";
   return (
     // <div>

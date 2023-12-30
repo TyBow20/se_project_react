@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
-      console.log(modalRef.current, e.target);
+      // console.log(modalRef.current, e.target);
       if (e.target.classList.contains("modal")) {
         handleCloseModal();
       }
@@ -95,7 +95,7 @@ function App() {
   useEffect(() => {
     getForecastWeather()
       .then((data) => {
-        console.log("data", data);
+        // console.log("data", data);
         const currentCity = data.name;
         setCity(currentCity);
         const temperature = parseWeatherData(data);
