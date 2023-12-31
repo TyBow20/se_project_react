@@ -10,7 +10,7 @@ const ItemModal = ({ selectedCard, onClose }) => {
         <img
           className="modal__card_image"
           src={selectedCard.link}
-          alt="cardimage"
+          alt={selectedCard.name}
         />
         <div className="modal__description">
           <div>{selectedCard.name}</div>

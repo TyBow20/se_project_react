@@ -7,14 +7,14 @@ const Header = ({ onCreateModal, date, city }) => {
     month: "long",
     day: "numeric",
   });
-  // console.log("currentDate", currentDate);
+  console.log("currentDate", currentDate);
   // const city = "New York";
   return (
     // <div>
     <header className="header">
       <div className="header__logo">
         <div>
-          <img src={logo} alt="logo" />
+          <img src={logo} alt={logo.wtwr} />
         </div>
         <div className="header__location">{`${currentDate}, ${city}`} </div>
       </div>
@@ -31,7 +31,7 @@ const Header = ({ onCreateModal, date, city }) => {
         </div>
         <div className="header__name">Terrence Tegegne</div>
         <div>
-          <img src={avatar} alt="avatar" />
+          <img src={avatar} alt={avatar.profileimage} />
         </div>
       </div>
     </header>
