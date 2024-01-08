@@ -1,34 +1,6 @@
 import "./WeatherCard.css";
 import { weatherStatus } from "../../utils/contants.js";
-
-// const weatherStatus = [
-//   {
-//     url: require("../../images/day/sunny.svg").default,
-//     day: true,
-//     type: "sunny",
-//   },
-//   {
-//     url: require("../../images/day/cloudy.svg").default,
-//     day: true,
-//     type: "cloudy",
-//   },
-//   {
-//     url: require("../../images/day/rain.svg").default,
-//     day: true,
-//     type: "rain",
-//   },
-//   {
-//     url: require("../../images/day/snow.svg").default,
-//     day: true,
-//     type: "snow",
-//   },
-//   {
-//     url: require("../../images/day/storm.svg").default,
-//     day: true,
-//     type: "storm",
-//   },
-//   { url: require("../../images/day/fog.svg").default, day: true, type: "fog" },
-// ];
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.js";
 
 const WeatherCard = ({ day, type, weatherTemp = "" }) => {
   const imgSrc = weatherStatus.filter((i) => {
