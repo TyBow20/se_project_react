@@ -1,0 +1,9 @@
+.side_bar {
+  display: flex;
+  font-family: "Cabinet", sans-serif;
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 229px;
+  height: 56px;
+}

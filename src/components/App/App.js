@@ -10,6 +10,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import { getForecastWeather, parseWeatherData } from "../../utils/WeatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import Profile from "../Profile/Profile";
 
 function App() {
   const weatherTemp = "75° F";
@@ -92,7 +93,9 @@ function App() {
           <Route exact path="/">
             <Main weatherTemp={temp} onSelectedCard={handleSeleectedCard} />
           </Route>
-          <Route path="/profile">Profile</Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
         </Switch>
 
         <Footer />
