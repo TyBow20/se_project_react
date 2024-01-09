@@ -1,4 +1,4 @@
-.side_bar {
+.side__bar {
   display: flex;
   font-family: "Cabinet", sans-serif;
   gap: 20px;
@@ -6,4 +6,6 @@
   justify-content: flex-start;
   width: 229px;
   height: 56px;
+  font-size: 20px;
+  font-weight: 700;
 }
