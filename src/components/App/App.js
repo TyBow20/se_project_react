@@ -146,7 +146,7 @@ function App() {
   const [temp, setTemp] = useState(0);
   const [city, setCity] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  const [clothingItems, setClothingItems] = useState([]);
+  const [defaultClothingItems, setClothingItems] = useState([]);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -162,7 +162,7 @@ function App() {
   };
 
   const onAddItem = (newItem) => {
-    setClothingItems([newItem, ...clothingItems]);
+    setClothingItems([newItem, ...defaultClothingItems]);
 
     handleCloseModal();
   };
