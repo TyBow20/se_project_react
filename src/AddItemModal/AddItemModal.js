@@ -106,6 +106,7 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(name, link, weatherType);
     onAddItem({ name, link, weatherType });
   };
 
@@ -141,7 +142,7 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
             type="url"
             name="link"
             minLength="1"
-            maxLength="30"
+            // maxLength="30"
             placeholder="Image URL"
             value={link}
             onChange={handleUrlChange}

@@ -92,7 +92,7 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import { defaultClothingItems } from "../../utils/contants";
 
-function Main({ weatherTemp, onSelectedCard }) {
+function Main({ weatherTemp, onSelectedCard, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 0;
@@ -119,11 +119,11 @@ function Main({ weatherTemp, onSelectedCard }) {
   }, [temp, currentTemperatureUnit]);
 
   const filteredCards = useMemo(() => {
-    return defaultClothingItems.filter(
+    return clothingItems.filter(
       (item) => item.weather.toLowerCase() === weatherType
     );
   }, [weatherType]);
-
+  console.log(clothingItems);
   return (
     <main className="main">
       <WeatherCard day={true} type="snow" weatherTemp={temp} />

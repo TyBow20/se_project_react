@@ -134,7 +134,7 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../../AddItemModal/AddItemModal";
-
+import { defaultClothingItems } from "../../utils/contants";
 import { Route, Switch } from "react-router-dom";
 import Profile from "../Profile/Profile";
 import { getForecastWeather, parseWeatherData } from "../../utils/WeatherApi";
@@ -146,7 +146,7 @@ function App() {
   const [temp, setTemp] = useState(0);
   const [city, setCity] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  const [defaultClothingItems, setClothingItems] = useState([]);
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -162,12 +162,20 @@ function App() {
   };
 
   const onAddItem = (newItem) => {
-    setClothingItems([newItem, ...defaultClothingItems]);
+    // console.log(newItem);
+    setClothingItems([newItem, ...clothingItems]);
 
     handleCloseModal();
   };
 
   useEffect(() => {
+    const handleOutsideClick = (e) => {
+      // console.log(modalRef.current, e.target);
+      if (e.target.classList.contains("modal")) {
+        handleCloseModal();
+      }
+    };
+
     const handleEscapeKey = (e) => {
       if (e.key === "Escape") {
         handleCloseModal();
@@ -175,10 +183,13 @@ function App() {
     };
 
     if (activeModal) {
+      // console.log(modalRef.current, e.target);
+      document.addEventListener("mousedown", handleOutsideClick);
       document.addEventListener("keydown", handleEscapeKey);
     }
 
     return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
       document.removeEventListener("keydown", handleEscapeKey);
     };
   }, [activeModal]);
@@ -208,10 +219,14 @@ function App() {
         <Header onCreateModal={handleCreateModal} city={city} />
         <Switch>
           <Route exact path="/">
-            <Main weatherTemp={temp} onSelectedCard={handleSelectedCard} />
+            <Main
+              weatherTemp={temp}
+              onSelectedCard={handleSelectedCard}
+              clothingItems={clothingItems}
+            />
           </Route>
           <Route path="/profile">
-            <Profile />
+            <Profile clothingItems={clothingItems} />
           </Route>
         </Switch>
         <Footer />
