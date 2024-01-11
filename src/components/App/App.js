@@ -139,7 +139,7 @@ import { Route, Switch } from "react-router-dom";
 import Profile from "../Profile/Profile";
 import { getForecastWeather, parseWeatherData } from "../../utils/WeatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import { deleteItem } from "../../utils/api";
+import { deleteItem, fetchItems } from "../../utils/api";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -147,7 +147,7 @@ function App() {
   const [temp, setTemp] = useState(0);
   const [city, setCity] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -209,6 +209,17 @@ function App() {
       })
       .catch((error) => {
         console.error("Error fetching weather data:", error);
+      });
+  }, []);
+
+  // new code for fetch items
+  useEffect(() => {
+    fetchItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching items:", error);
       });
   }, []);
 

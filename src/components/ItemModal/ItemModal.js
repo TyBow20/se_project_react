@@ -3,7 +3,7 @@ import "./ItemModal.css";
 const ItemModal = ({ selectedCard, onClose, onDelete }) => {
   //new code
   const handleDelete = () => {
-    onDelete(selectedCard.id);
+    onDelete(selectedCard._id);
     onClose();
   };
   //end new code, onDelete was also added
@@ -15,7 +15,7 @@ const ItemModal = ({ selectedCard, onClose, onDelete }) => {
         </button>
         <img
           className="modal__card_image"
-          src={selectedCard.link}
+          src={selectedCard.imageUrl}
           alt={selectedCard.name}
         />
         <div className="modal__description">

@@ -31,6 +31,7 @@ export const addItem = async (itemData) => {
 };
 
 export const deleteItem = async (itemId) => {
+  debugger;
   try {
     const response = await fetch(`http://localhost:3001/items/${itemId}`, {
       method: "DELETE",
