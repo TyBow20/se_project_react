@@ -139,7 +139,8 @@ import { Route, Switch } from "react-router-dom";
 import Profile from "../Profile/Profile";
 import { getForecastWeather, parseWeatherData } from "../../utils/WeatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import { deleteItem, fetchItems } from "../../utils/api";
+import { fetchItems } from "../../utils/api";
+import { addItem, deleteItem } from "../../utils/api";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -228,7 +229,7 @@ function App() {
     try {
       await deleteItem(itemId);
       setClothingItems((prevItems) =>
-        prevItems.filter((item) => item.id !== itemId)
+        prevItems.filter((item) => item._id !== itemId)
       );
     } catch (error) {
       console.error("Error deleting item:", error);
@@ -237,14 +238,14 @@ function App() {
 
   // new code for add item
 
-  // const handleAddItem = async (itemData) => {
-  //   try {
-  //     const newItem = await addItem(itemData);
-  //     setClothingItems((prevItems) => [newItem, ...prevItems]);
-  //   } catch (error) {
-  //     console.error("Error adding item:", error);
-  //   }
-  // };
+  const handleAddItem = async (itemData) => {
+    try {
+      const newItem = await addItem(itemData);
+      setClothingItems((prevItems) => [newItem, ...prevItems]);
+    } catch (error) {
+      console.error("Error adding item:", error);
+    }
+  };
 
   // end new code
 
@@ -274,7 +275,7 @@ function App() {
           <AddItemModal
             handleCloseModal={handleCloseModal}
             isOpen={activeModal === "create"}
-            onAddItem={onAddItem}
+            onAddItem={handleAddItem}
           />
         )}
         {activeModal === "preview" && (
