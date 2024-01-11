@@ -122,7 +122,7 @@ function Main({ weatherTemp, onSelectedCard, clothingItems }) {
     return clothingItems.filter(
       (item) => item.weather.toLowerCase() === weatherType
     );
-  }, [weatherType]);
+  }, [weatherType, clothingItems]);
   console.log(clothingItems);
   return (
     <main className="main">

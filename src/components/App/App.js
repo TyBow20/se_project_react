@@ -226,7 +226,10 @@ function App() {
             />
           </Route>
           <Route path="/profile">
-            <Profile clothingItems={clothingItems} />
+            <Profile
+              clothingItems={clothingItems}
+              onSelectedCard={handleSelectedCard}
+            />
           </Route>
         </Switch>
         <Footer />

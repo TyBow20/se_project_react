@@ -68,3 +68,7 @@
 .modal__form {
   font-family: "Cabinet", sans-serif;
 }
+
+.modal__content_type_image {
+  padding: 0;
+}
