@@ -235,6 +235,17 @@ function App() {
     }
   };
 
+  // new code for add item
+
+  // const handleAddItem = async (itemData) => {
+  //   try {
+  //     const newItem = await addItem(itemData);
+  //     setClothingItems((prevItems) => [newItem, ...prevItems]);
+  //   } catch (error) {
+  //     console.error("Error adding item:", error);
+  //   }
+  // };
+
   // end new code
 
   return (
