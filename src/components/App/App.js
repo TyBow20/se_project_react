@@ -139,6 +139,7 @@ import { Route, Switch } from "react-router-dom";
 import Profile from "../Profile/Profile";
 import { getForecastWeather, parseWeatherData } from "../../utils/WeatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import { deleteItem } from "../../utils/api";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -211,6 +212,20 @@ function App() {
       });
   }, []);
 
+  //new code for delete item
+  const handleDeleteItem = async (itemId) => {
+    try {
+      await deleteItem(itemId);
+      setClothingItems((prevItems) =>
+        prevItems.filter((item) => item.id !== itemId)
+      );
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
+
+  // end new code
+
   return (
     <div className="center">
       <CurrentTemperatureUnitContext.Provider
@@ -241,7 +256,11 @@ function App() {
           />
         )}
         {activeModal === "preview" && (
-          <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+          <ItemModal
+            selectedCard={selectedCard}
+            onClose={handleCloseModal}
+            onDelete={handleDeleteItem}
+          />
         )}
       </CurrentTemperatureUnitContext.Provider>
     </div>
