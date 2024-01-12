@@ -133,7 +133,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
-import AddItemModal from "../../AddItemModal/AddItemModal";
+import AddItemModal from "../AddItemModal/AddItemModal";
 import { defaultClothingItems } from "../../utils/contants";
 import { Route, Switch } from "react-router-dom";
 import Profile from "../Profile/Profile";

@@ -1,18 +1,6 @@
 {
   "items": [
     {
-      "_id": 2,
-      "name": "Cap",
-      "weather": "hot",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png?etag=f3dad389b22909cafa73cff9f9a3d591"
-    },
-    {
-      "_id": 4,
-      "name": "Dress",
-      "weather": "hot",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Dress.png?etag=1f9cd32a311ab139cab43494883720bf"
-    },
-    {
       "_id": 6,
       "name": "Jacket",
       "weather": "cold",
@@ -94,12 +82,6 @@
       "name": "too low",
       "imageUrl": "https://www.paragonjackets.com/wp-content/uploads/2023/07/Pokemon-Go-Level-50-Bomber-Jacket-510x680.jpg",
       "weather": "",
-      "_id": 22
-    },
-    {
-      "name": "too low",
-      "imageUrl": "https://www.paragonjackets.com/wp-content/uploads/2023/07/Pokemon-Go-Level-50-Bomber-Jacket-510x680.jpg",
-      "weather": "",
       "_id": 23
     },
     {
@@ -107,12 +89,6 @@
       "imageUrl": "https://www.paragonjackets.com/wp-content/uploads/2023/07/Pokemon-Go-Level-50-Bomber-Jacket-510x680.jpg",
       "weather": "",
       "_id": 24
-    },
-    {
-      "name": "too low",
-      "imageUrl": "https://www.paragonjackets.com/wp-content/uploads/2023/07/Pokemon-Go-Level-50-Bomber-Jacket-510x680.jpg",
-      "weather": "cold",
-      "_id": 26
     },
     {
       "name": "too low",
@@ -124,7 +100,7 @@
       "name": "too low",
       "imageUrl": "https://images.stockx.com/360/Air-Jordan-1-Retro-High-Off-White-University-Blue/Images/Air-Jordan-1-Retro-High-Off-White-University-Blue/Lv2/img01.jpg?fm=jpg&auto=compress&w=480&dpr=2&updated_at=1634917617&h=320&q=60",
       "weather": "cold",
-      "_id": 29
+      "_id": 30
     }
   ]
 }

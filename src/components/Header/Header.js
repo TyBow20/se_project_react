@@ -47,7 +47,7 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../images/wtwr.svg";
 import avatar from "../../images/avatar.svg";
-import ToggleSwitch from "../../ToggleSwitch/ToggleSwitch";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 const Header = ({ onCreateModal, date, city }) => {
   const currentDate = new Date().toLocaleString("default", {
