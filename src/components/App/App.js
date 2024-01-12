@@ -255,6 +255,7 @@ function App() {
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
         <Header onCreateModal={handleCreateModal} city={city} />
+
         <Switch>
           <Route exact path="/">
             <Main
@@ -270,6 +271,7 @@ function App() {
             />
           </Route>
         </Switch>
+
         <Footer />
         {activeModal === "create" && (
           <AddItemModal

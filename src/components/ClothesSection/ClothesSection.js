@@ -7,7 +7,7 @@ const ClothesSection = ({ clothingItems, onSelectedCard }) => {
   return (
     <div className="clothes">
       <section className="card__section" id="card-section">
-        Your items + Add New
+        Your items
         <div className="card__items">
           {clothingItems.map((item) => (
             <ItemCard
