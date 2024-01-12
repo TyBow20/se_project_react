@@ -1,6 +1,6 @@
 .clothes {
   display: flex;
   width: 1360px;
-  height: 735px;
+  /* height: 735px; */
   flex-direction: column;
 }

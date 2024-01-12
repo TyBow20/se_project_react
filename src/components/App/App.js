@@ -163,12 +163,10 @@ function App() {
     setSelectedCard(card);
   };
 
-  const onAddItem = (newItem) => {
-    // console.log(newItem);
-    setClothingItems([newItem, ...clothingItems]);
-
-    handleCloseModal();
-  };
+  // const onAddItem = (newItem) => {
+  //   // console.log(newItem);
+  //   setClothingItems([newItem, ...clothingItems]);
+  // };
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -242,6 +240,7 @@ function App() {
     try {
       const newItem = await addItem(itemData);
       setClothingItems((prevItems) => [newItem, ...prevItems]);
+      handleCloseModal();
     } catch (error) {
       console.error("Error adding item:", error);
     }
