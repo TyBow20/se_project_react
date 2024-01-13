@@ -1,12 +1,6 @@
 {
   "items": [
     {
-      "_id": 6,
-      "name": "Jacket",
-      "weather": "cold",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad"
-    },
-    {
       "_id": 7,
       "name": "Jeans",
       "weather": "warm",
@@ -94,13 +88,43 @@
       "name": "too low",
       "imageUrl": "https://images.stockx.com/360/Air-Jordan-1-Retro-High-Off-White-University-Blue/Images/Air-Jordan-1-Retro-High-Off-White-University-Blue/Lv2/img01.jpg?fm=jpg&auto=compress&w=480&dpr=2&updated_at=1634917617&h=320&q=60",
       "weather": "cold",
-      "_id": 28
+      "_id": 30
     },
     {
       "name": "too low",
       "imageUrl": "https://images.stockx.com/360/Air-Jordan-1-Retro-High-Off-White-University-Blue/Images/Air-Jordan-1-Retro-High-Off-White-University-Blue/Lv2/img01.jpg?fm=jpg&auto=compress&w=480&dpr=2&updated_at=1634917617&h=320&q=60",
       "weather": "cold",
-      "_id": 30
+      "_id": 32
+    },
+    {
+      "name": "too low",
+      "imageUrl": "https://www.paragonjackets.com/wp-content/uploads/2023/07/Pokemon-Go-Level-50-Bomber-Jacket-510x680.jpg",
+      "weather": "",
+      "_id": 33
+    },
+    {
+      "name": "too low",
+      "imageUrl": "https://www.paragonjackets.com/wp-content/uploads/2023/07/Pokemon-Go-Level-50-Bomber-Jacket-510x680.jpg",
+      "weather": "cold",
+      "_id": 34
+    },
+    {
+      "name": "too low",
+      "imageUrl": "https://images.stockx.com/360/Air-Jordan-1-Retro-High-Off-White-University-Blue/Images/Air-Jordan-1-Retro-High-Off-White-University-Blue/Lv2/img01.jpg?fm=jpg&auto=compress&w=480&dpr=2&updated_at=1634917617&h=320&q=60",
+      "weather": "cold",
+      "_id": 35
+    },
+    {
+      "name": "too low",
+      "imageUrl": "https://www.paragonjackets.com/wp-content/uploads/2023/07/Pokemon-Go-Level-50-Bomber-Jacket-510x680.jpg",
+      "weather": "cold",
+      "_id": 36
+    },
+    {
+      "name": "too low",
+      "imageUrl": "https://www.paragonjackets.com/wp-content/uploads/2023/07/Pokemon-Go-Level-50-Bomber-Jacket-510x680.jpg",
+      "weather": "cold",
+      "_id": 37
     }
   ]
 }

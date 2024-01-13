@@ -7,7 +7,10 @@ const ClothesSection = ({ clothingItems, onSelectedCard }) => {
   return (
     <div className="clothes">
       <section className="card__section" id="card-section">
-        Your items
+        <div className="clothes__items">
+          Your items
+          <button className="card__button">+ Add new</button>
+        </div>
         <div className="card__items">
           {clothingItems.map((item) => (
             <ItemCard
