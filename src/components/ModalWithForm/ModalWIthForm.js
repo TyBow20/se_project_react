@@ -9,9 +9,6 @@ const ModalWithForm = ({
   isOpen,
   onSubmit,
 }) => {
-  // if (!isOpen) {
-  //   return null;
-  // }
   return (
     <div className={`modal modal__type_${name}`}>
       <div className="modal__content">

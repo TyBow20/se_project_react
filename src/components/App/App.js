@@ -229,6 +229,7 @@ function App() {
       setClothingItems((prevItems) =>
         prevItems.filter((item) => item._id !== itemId)
       );
+      handleCloseModal();
     } catch (error) {
       console.error("Error deleting item:", error);
     }
@@ -248,6 +249,15 @@ function App() {
 
   // end new code
 
+  //new code for add item
+
+  const handleOpenCreateModal = () => {
+    console.log("hello");
+    setActiveModal("create");
+  };
+
+  // end new code for add
+
   return (
     <div className="center">
       <CurrentTemperatureUnitContext.Provider
@@ -261,12 +271,14 @@ function App() {
               weatherTemp={temp}
               onSelectedCard={handleSelectedCard}
               clothingItems={clothingItems}
+              onAddNewItem={handleOpenCreateModal}
             />
           </Route>
           <Route path="/profile">
             <Profile
               clothingItems={clothingItems}
               onSelectedCard={handleSelectedCard}
+              onAddNewItem={handleOpenCreateModal}
             />
           </Route>
         </Switch>

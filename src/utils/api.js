@@ -45,6 +45,8 @@
 //   }
 // };
 
+// refactored code
+
 const baseUrl = "http://localhost:3001";
 
 function checkResponse(response) {
@@ -54,9 +56,14 @@ function checkResponse(response) {
   return response.json();
 }
 
-function request(url, options) {
+//new code
+export function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }
+//old code
+// function request(url, options) {
+//   return fetch(url, options).then(checkResponse);
+// }
 
 export const fetchItems = async () => {
   const response = await request(`${baseUrl}/items`);
