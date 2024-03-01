@@ -1,132 +1,3 @@
-// import logo from "..public/favicon.ico";
-// import logo from "./logo.svg";
-// import "./App.css";
-// import Header from "../Header/Header";
-// import Main from "../Main/Main";
-// import Footer from "../Footer/Footer";
-// import ModalWithForm from "../ModalWithForm/ModalWIthForm";
-// import { useState, useEffect, useRef } from "react";
-// import ItemModal from "../ItemModal/ItemModal";
-// import { getForecastWeather, parseWeatherData } from "../../utils/WeatherApi";
-// import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-// import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
-// import Profile from "../Profile/Profile";
-// import AddItemModal from "../../AddItemModal/AddItemModal";
-
-// function App() {
-//   const weatherTemp = "75° F";
-//   const [activeModal, setActiveModal] = useState("");
-//   const [selectedCard, setSelectedCard] = useState({});
-//   const [temp, setTemp] = useState(0);
-//   const [city, setCity] = useState("");
-//   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-
-//   const handleCreateModal = () => {
-//     setActiveModal("create");
-//   };
-
-//   const handleCloseModal = () => {
-//     setActiveModal("");
-//   };
-
-//   const handleSeleectedCard = (card) => {
-//     setActiveModal("preview");
-//     setSelectedCard(card);
-//   };
-
-//   const onAddItem = (values) => {
-//     console.log(values);
-//   };
-
-//   // start modal click effect
-
-//   const modalRef = useRef(null);
-
-//   useEffect(() => {
-//     const handleOutsideClick = (e) => {
-//       // console.log(modalRef.current, e.target);
-//       if (e.target.classList.contains("modal")) {
-//         handleCloseModal();
-//       }
-//     };
-
-//     const handleEscapeKey = (e) => {
-//       if (e.key === "Escape") {
-//         handleCloseModal();
-//       }
-//     };
-
-//     if (activeModal) {
-//       // console.log(modalRef.current, e.target);
-//       document.addEventListener("mousedown", handleOutsideClick);
-//       document.addEventListener("keydown", handleEscapeKey);
-//     }
-
-//     return () => {
-//       document.removeEventListener("mousedown", handleOutsideClick);
-//       document.removeEventListener("keydown", handleEscapeKey);
-//     };
-//   }, [activeModal]);
-
-//   const handleToggleSwitchChange = () => {
-//     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
-//     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
-//   };
-
-//   useEffect(() => {
-//     getForecastWeather()
-//       .then((data) => {
-//         // console.log("data", data);
-//         const currentCity = data.name;
-//         setCity(currentCity);
-//         const temperature = parseWeatherData(data);
-//         console.log(temperature);
-//         setTemp(temperature);
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching weather data:", error);
-//       });
-//   }, []);
-//   // console.log(currentTemperatureUnit);
-//   return (
-//     <div className="center">
-//       <CurrentTemperatureUnitContext.Provider
-//         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-//       >
-//         <Header onCreateModal={handleCreateModal} city={city} />
-//         <Switch>
-//           <Route exact path="/">
-//             <Main weatherTemp={temp} onSelectedCard={handleSeleectedCard} />
-//           </Route>
-//           <Route path="/profile">
-//             <Profile />
-//           </Route>
-//         </Switch>
-
-//         <Footer />
-//         {activeModal === "create" && (
-//           <AddItemModal
-//             handleCloseModal={handleCloseModal}
-//             isOpen={activeModal === "create"}
-//             onAddItem={onAddItem}
-//           />
-//         )}
-//         {activeModal === "preview" && (
-//           <ItemModal
-//             selectedCard={selectedCard}
-//             onClose={handleCloseModal}
-//             // ref={modalRef}
-//           />
-//         )}
-//       </CurrentTemperatureUnitContext.Provider>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-// New code
-
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "../Header/Header";
@@ -134,6 +5,8 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
 import { defaultClothingItems } from "../../utils/contants";
 import { Route, Switch } from "react-router-dom";
 import Profile from "../Profile/Profile";
@@ -141,6 +14,9 @@ import { getForecastWeather, parseWeatherData } from "../../utils/WeatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { fetchItems } from "../../utils/api";
 import { addItem, deleteItem } from "../../utils/api";
+import { register } from "../../utils/auth";
+import { login } from "../../utils/auth";
+import { checkToken } from "../../utils/auth";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -149,6 +25,8 @@ function App() {
   const [city, setCity] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -162,11 +40,6 @@ function App() {
     setActiveModal("preview");
     setSelectedCard(card);
   };
-
-  // const onAddItem = (newItem) => {
-  //   // console.log(newItem);
-  //   setClothingItems([newItem, ...clothingItems]);
-  // };
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -211,7 +84,6 @@ function App() {
       });
   }, []);
 
-  // new code for fetch items
   useEffect(() => {
     fetchItems()
       .then((data) => {
@@ -222,7 +94,21 @@ function App() {
       });
   }, []);
 
-  //new code for delete item
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      checkToken(token)
+        .then((userData) => {
+          setIsAuthenticated(true);
+          setUser(userData);
+        })
+        .catch((error) => {
+          localStorage.removeItem("jwt");
+          console.error(error);
+        });
+    }
+  }, []);
+
   const handleDeleteItem = async (itemId) => {
     try {
       await deleteItem(itemId);
@@ -235,8 +121,6 @@ function App() {
     }
   };
 
-  // new code for add item
-
   const handleAddItem = async (itemData) => {
     try {
       const newItem = await addItem(itemData);
@@ -247,16 +131,41 @@ function App() {
     }
   };
 
-  // end new code
-
-  //new code for add item
-
   const handleOpenCreateModal = () => {
     console.log("hello");
     setActiveModal("create");
   };
 
-  // end new code for add
+  // new code
+
+  const handleRegister = async (username, email, password) => {
+    try {
+      const userData = await register(username, email, password);
+      setUser(userData);
+      setIsAuthenticated(true);
+      handleCloseModal();
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
+  };
+
+  const handleLogin = async (email, password) => {
+    try {
+      const res = await login(email, password);
+      if (res.token) {
+        localStorage.setItem("jwt", res.token);
+        setIsAuthenticated(true);
+        setUser(res.user);
+        handleCloseModal();
+      } else {
+        console.error("Login failed: No token received");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  };
+
+  //end new code
 
   return (
     <div className="center">
@@ -296,6 +205,20 @@ function App() {
             selectedCard={selectedCard}
             onClose={handleCloseModal}
             onDelete={handleDeleteItem}
+          />
+        )}
+        {activeModal === "register" && (
+          <RegisterModal
+            isOpen={activeModal === "register"}
+            onClose={handleCloseModal}
+            onRegister={handleRegister}
+          />
+        )}
+        {activeModal === "login" && (
+          <LoginModal
+            isOpen={activeModal === "login"}
+            onClose={handleCloseModal}
+            onLogin={handleLogin}
           />
         )}
       </CurrentTemperatureUnitContext.Provider>
