@@ -5,7 +5,7 @@ import logo from "../../images/wtwr.svg";
 import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-const Header = ({ onCreateModal, date, city }) => {
+const Header = ({ onCreateModal, date, city, isLoggedIn }) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -22,18 +22,39 @@ const Header = ({ onCreateModal, date, city }) => {
       </div>
       <div className="header__avatar-logo">
         <ToggleSwitch />
-        <button
-          className="header__newclothes"
-          onClick={onCreateModal}
-          type="text"
-        >
-          + Add clothes
-        </button>
-        <Link to="/profile">
-          {" "}
-          <div className="header__name">Terrence Tegegne</div>
-        </Link>
-        <img src={avatar} alt="avatar" />
+        {!isLoggedIn ? (
+          <>
+            <button
+              className="header__newclothes"
+              onClick={onCreateModal}
+              type="text"
+            >
+              Sign Up
+            </button>{" "}
+            <button
+              className="header__newclothes"
+              onClick={onCreateModal}
+              type="text"
+            >
+              Sign In
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              className="header__newclothes"
+              onClick={onCreateModal}
+              type="text"
+            >
+              + Add clothes
+            </button>
+            <Link to="/profile">
+              {" "}
+              <div className="header__name">Terrence Tegegne</div>
+            </Link>
+            <img src={avatar} alt="avatar" />
+          </>
+        )}
       </div>
     </header>
   );

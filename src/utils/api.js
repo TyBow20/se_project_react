@@ -1,52 +1,3 @@
-// export const fetchItems = async () => {
-//   try {
-//     const response = await fetch("http://localhost:3001/items");
-//     if (!response.ok) {
-//       throw new Error("Network response was not ok");
-//     }
-//     return response.json();
-//   } catch (error) {
-//     console.error("Could not fetch items:", error);
-//     throw error;
-//   }
-// };
-
-// export const addItem = async (itemData) => {
-//   try {
-//     const response = await fetch("http://localhost:3001/items", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(itemData),
-//     });
-//     if (!response.ok) {
-//       throw new Error("Network response was not ok");
-//     }
-//     return response.json();
-//   } catch (error) {
-//     console.error("Could not post new item:", error);
-//     throw error;
-//   }
-// };
-
-// export const deleteItem = async (itemId) => {
-//   try {
-//     const response = await fetch(`http://localhost:3001/items/${itemId}`, {
-//       method: "DELETE",
-//     });
-//     if (!response.ok) {
-//       throw new Error("Network response was not ok");
-//     }
-//     return response.json();
-//   } catch (error) {
-//     console.error("Could not delete item:", error);
-//     throw error;
-//   }
-// };
-
-// refactored code
-
 const baseUrl = "http://localhost:3001";
 
 function checkResponse(response) {
@@ -56,14 +7,9 @@ function checkResponse(response) {
   return response.json();
 }
 
-//new code
 export function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }
-//old code
-// function request(url, options) {
-//   return fetch(url, options).then(checkResponse);
-// }
 
 export const fetchItems = async () => {
   const response = await request(`${baseUrl}/items`);
@@ -87,3 +33,59 @@ export const deleteItem = async (itemId) => {
   });
   return response;
 };
+
+//refactored code
+
+// const baseUrl = "http://localhost:3001";
+
+// function checkResponse(response) {
+//   if (!response.ok) {
+//     throw new Error(`Network response was not ok, status: ${response.status}`);
+//   }
+//   return response.json();
+// }
+
+// // Modify the request function to optionally accept a token
+// export function request(url, options, token = null) {
+//   const headers = {
+//     ...options.headers,
+//     "Content-Type": "application/json",
+//   };
+
+//   // Include the Authorization header with the token if it's provided
+//   if (token) {
+//     headers["Authorization"] = `Bearer ${token}`;
+//   }
+
+//   return fetch(url, { ...options, headers }).then(checkResponse);
+// }
+
+// export const fetchItems = async () => {
+//   const response = await request(`${baseUrl}/items`);
+//   return response;
+// };
+
+// // Modify addItem to accept a token parameter
+// export const addItem = async (itemData, token) => {
+//   const response = await request(
+//     `${baseUrl}/items`,
+//     {
+//       method: "POST",
+//       body: JSON.stringify(itemData),
+//     },
+//     token
+//   ); // Pass the token here
+//   return response;
+// };
+
+// // Modify deleteItem to accept a token parameter
+// export const deleteItem = async (itemId, token) => {
+//   const response = await request(
+//     `${baseUrl}/items/${itemId}`,
+//     {
+//       method: "DELETE",
+//     },
+//     token
+//   ); // Pass the token here
+//   return response;
+// };
