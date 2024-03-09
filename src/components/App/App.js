@@ -26,10 +26,12 @@ function App() {
   const [city, setCity] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
+  // const [isAuthenticated, setIsLoggedIn] = useState(false);
+  // const [user, setCurrentUser] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -102,8 +104,8 @@ function App() {
     if (token) {
       checkToken(token)
         .then((userData) => {
-          setIsAuthenticated(true);
-          setUser(userData);
+          setIsLoggedIn(true);
+          setCurrentUser(userData);
         })
         .catch((error) => {
           localStorage.removeItem("jwt");
@@ -119,8 +121,8 @@ function App() {
         .then((userData) => {
           setIsLoggedIn(true);
           setCurrentUser(userData);
-          setIsAuthenticated(true);
-          setUser(userData);
+          setIsLoggedIn(true);
+          setCurrentUser(userData);
         })
         .catch((error) => {
           setIsLoggedIn(false);
@@ -144,7 +146,8 @@ function App() {
 
   const handleAddItem = async (itemData) => {
     try {
-      const newItem = await addItem(itemData);
+      const token = localStorage.getItem("jwt");
+      const newItem = await addItem(itemData, token);
       setClothingItems((prevItems) => [newItem, ...prevItems]);
       handleCloseModal();
     } catch (error) {
@@ -158,12 +161,30 @@ function App() {
   };
 
   // new code
+  const handleOpenSignUpModal = () => {
+    setActiveModal("register");
+  };
 
-  const handleRegister = async (username, email, password) => {
+  const handleOpenSignInModal = () => {
+    setActiveModal("login");
+  };
+
+  // Handlers for closing the modals
+  const handleCloseSignUpModal = () => {
+    setActiveModal("");
+  };
+
+  const handleCloseSignInModal = () => {
+    setActiveModal("");
+  };
+
+  // new code
+
+  const handleRegister = async (name, email, password, avatar) => {
     try {
-      const userData = await register(username, email, password);
-      setUser(userData);
-      setIsAuthenticated(true);
+      const userData = await register(name, email, password, avatar);
+      setCurrentUser(userData);
+      setIsLoggedIn(true);
       handleCloseModal();
     } catch (error) {
       console.error("Registration failed:", error);
@@ -173,10 +194,12 @@ function App() {
   const handleLogin = async (email, password) => {
     try {
       const res = await login(email, password);
+
       if (res.token) {
         localStorage.setItem("jwt", res.token);
-        setIsAuthenticated(true);
-        setUser(res.user);
+        setIsLoggedIn(true);
+        const user = await checkToken(res.token);
+        setCurrentUser(user);
         handleCloseModal();
       } else {
         console.error("Login failed: No token received");
@@ -188,6 +211,73 @@ function App() {
 
   //end new code
 
+  //   return (
+  //     <CurrentUserContext.Provider value={currentUser}>
+  //       <div className="center">
+  //         <CurrentTemperatureUnitContext.Provider
+  //           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+  //         >
+  //           <Header
+  //             onCreateModal={handleCreateModal}
+  //             city={city}
+  //             isLoggedIn={isLoggedIn}
+  //           />
+
+  //           <Switch>
+  //             <Route exact path="/">
+  //               <Main
+  //                 weatherTemp={temp}
+  //                 onSelectedCard={handleSelectedCard}
+  //                 clothingItems={clothingItems}
+  //                 onAddNewItem={handleOpenCreateModal}
+  //               />
+  //             </Route>
+  //             <Route path="/profile">
+  //               <Profile
+  //                 clothingItems={clothingItems}
+  //                 onSelectedCard={handleSelectedCard}
+  //                 onAddNewItem={handleOpenCreateModal}
+  //               />
+  //             </Route>
+  //           </Switch>
+
+  //           <Footer />
+  //           {activeModal === "create" && (
+  //             <AddItemModal
+  //               handleCloseModal={handleCloseModal}
+  //               isOpen={activeModal === "create"}
+  //               onAddItem={handleAddItem}
+  //             />
+  //           )}
+  //           {activeModal === "preview" && (
+  //             <ItemModal
+  //               selectedCard={selectedCard}
+  //               onClose={handleCloseModal}
+  //               onDelete={handleDeleteItem}
+  //             />
+  //           )}
+  //           {activeModal === "register" && (
+  //             <RegisterModal
+  //               isOpen={activeModal === "register"}
+  //               onClose={handleCloseModal}
+  //               onRegister={handleRegister}
+  //             />
+  //           )}
+  //           {activeModal === "login" && (
+  //             <LoginModal
+  //               isOpen={activeModal === "login"}
+  //               onClose={handleCloseModal}
+  //               onLogin={handleLogin}
+  //             />
+  //           )}
+  //         </CurrentTemperatureUnitContext.Provider>
+  //       </div>
+  //     </CurrentUserContext.Provider>
+  //   );
+  // }
+
+  // export default App;
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="center">
@@ -195,7 +285,8 @@ function App() {
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
           <Header
-            onCreateModal={handleCreateModal}
+            onOpenSignUpModal={handleOpenSignUpModal}
+            onOpenSignInModal={handleOpenSignInModal}
             city={city}
             isLoggedIn={isLoggedIn}
           />
@@ -233,17 +324,17 @@ function App() {
               onDelete={handleDeleteItem}
             />
           )}
+          {/* Register Modal */}
           {activeModal === "register" && (
             <RegisterModal
-              isOpen={activeModal === "register"}
-              onClose={handleCloseModal}
+              onClose={handleCloseSignUpModal}
               onRegister={handleRegister}
             />
           )}
+          {/* Login Modal */}
           {activeModal === "login" && (
             <LoginModal
-              isOpen={activeModal === "login"}
-              onClose={handleCloseModal}
+              onClose={handleCloseSignInModal}
               onLogin={handleLogin}
             />
           )}

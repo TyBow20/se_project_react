@@ -1,16 +1,29 @@
 import React, { useState, useContext } from "react";
 import ModalWithForm from "./ModalWithForm";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { updateUserProfile } from "../../utils/auth";
 
 const EditProfileModal = ({ isOpen, onClose }) => {
   const currentUser = useContext(CurrentUserContext);
-  const [username, setUsername] = useState(currentUser?.username);
+  const [name, setName] = useState(currentUser?.name);
   const [avatar, setAvatar] = useState(currentUser?.avatar);
 
-  const handleSubmit = (event) => {
+  //   const handleSubmit = (event) => {
+  //     event.preventDefault();
+  //   };
+
+  //new code
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Make API call to update the user's profile
-    // updateUserProfile({ username, avatar }).then(...);
+    const token = localStorage.getItem("jwt");
+    try {
+      const updatedUser = await updateUserProfile({ name, avatar }, token);
+
+      onClose();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -18,9 +31,9 @@ const EditProfileModal = ({ isOpen, onClose }) => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <input
           type="text"

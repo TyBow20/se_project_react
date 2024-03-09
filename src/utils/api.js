@@ -16,11 +16,13 @@ export const fetchItems = async () => {
   return response;
 };
 
-export const addItem = async (itemData) => {
+export const addItem = async (itemData, token) => {
+  console.log(token);
   const response = await request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(itemData),
   });
@@ -30,6 +32,20 @@ export const addItem = async (itemData) => {
 export const deleteItem = async (itemId) => {
   const response = await request(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
+  });
+  return response;
+};
+
+// new code
+
+export const updateUserProfile = async (userData, token) => {
+  const response = await request(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(userData),
   });
   return response;
 };

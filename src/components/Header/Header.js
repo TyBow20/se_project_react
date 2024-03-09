@@ -5,7 +5,14 @@ import logo from "../../images/wtwr.svg";
 import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-const Header = ({ onCreateModal, date, city, isLoggedIn }) => {
+const Header = ({
+  onCreateModal,
+  date,
+  city,
+  isLoggedIn,
+  onOpenSignInModal,
+  onOpenSignUpModal,
+}) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -26,17 +33,17 @@ const Header = ({ onCreateModal, date, city, isLoggedIn }) => {
           <>
             <button
               className="header__newclothes"
-              onClick={onCreateModal}
+              onClick={onOpenSignUpModal}
               type="text"
             >
               Sign Up
             </button>{" "}
             <button
               className="header__newclothes"
-              onClick={onCreateModal}
+              onClick={onOpenSignInModal}
               type="text"
             >
-              Sign In
+              Log In
             </button>
           </>
         ) : (

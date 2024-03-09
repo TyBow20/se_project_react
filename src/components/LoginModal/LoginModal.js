@@ -55,24 +55,29 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
   };
 
   return (
-    <ModalWithForm title="Login" isOpen={isOpen} onClose={onClose}>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
+    <ModalWithForm
+      title="Login"
+      isOpen={isOpen}
+      onClose={onClose}
+      buttonText={"Login"}
+      onSubmit={handleSubmit}
+    >
+      {/* <form onSubmit={handleSubmit}> */}
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      {/* </form> */}
     </ModalWithForm>
   );
 };

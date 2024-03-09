@@ -1,11 +1,11 @@
 const API_BASE_URL = "http://localhost:3001";
 
-export const register = async (username, avatar, email, password) => {
+export const register = async (name, email, password, avatar) => {
   try {
     const response = await fetch(`${API_BASE_URL}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, avatar, email, password }),
+      body: JSON.stringify({ name, email, password, avatar }),
     });
     if (!response.ok) throw new Error("Registration failed");
     return await response.json();
