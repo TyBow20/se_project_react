@@ -29,14 +29,16 @@ export const addItem = async (itemData, token) => {
   return response;
 };
 
-export const deleteItem = async (itemId) => {
+export const deleteItem = async (itemId, token) => {
   const response = await request(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   });
   return response;
 };
-
-// new code
 
 export const updateUserProfile = async (userData, token) => {
   const response = await request(`${baseUrl}/users/me`, {
@@ -46,6 +48,30 @@ export const updateUserProfile = async (userData, token) => {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(userData),
+  });
+  return response;
+};
+
+//new code
+
+export const addCardLike = async (itemId, token) => {
+  const response = await request(`${baseUrl}/items/${itemId}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+};
+
+export const removeCardLike = async (itemId, token) => {
+  const response = await request(`${baseUrl}/items/${itemId}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   });
   return response;
 };

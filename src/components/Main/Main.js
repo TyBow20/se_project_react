@@ -92,7 +92,7 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import { defaultClothingItems } from "../../utils/contants";
 
-function Main({ weatherTemp, onSelectedCard, clothingItems }) {
+function Main({ weatherTemp, onSelectedCard, clothingItems, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 0;
@@ -135,6 +135,7 @@ function Main({ weatherTemp, onSelectedCard, clothingItems }) {
               key={item._id}
               item={item}
               onSelectedCard={onSelectedCard}
+              onCardLike={onCardLike}
             />
           ))}
         </div>

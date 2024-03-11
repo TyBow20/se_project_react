@@ -8,10 +8,6 @@ const EditProfileModal = ({ isOpen, onClose }) => {
   const [name, setName] = useState(currentUser?.name);
   const [avatar, setAvatar] = useState(currentUser?.avatar);
 
-  //   const handleSubmit = (event) => {
-  //     event.preventDefault();
-  //   };
-
   //new code
 
   const handleSubmit = async (event) => {
@@ -19,7 +15,7 @@ const EditProfileModal = ({ isOpen, onClose }) => {
     const token = localStorage.getItem("jwt");
     try {
       const updatedUser = await updateUserProfile({ name, avatar }, token);
-
+      onUpdateUser(updatedUser);
       onClose();
     } catch (error) {
       console.error(error);
