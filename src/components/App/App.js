@@ -267,6 +267,7 @@ function App() {
                 onSelectedCard={handleSelectedCard}
                 onAddNewItem={handleOpenCreateModal}
                 onSignOut={onSignOut}
+                onCardLike={handleCardLike}
               />
             </Route>
           </Switch>

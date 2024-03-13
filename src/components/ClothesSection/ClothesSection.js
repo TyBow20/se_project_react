@@ -36,7 +36,12 @@ import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-const ClothesSection = ({ clothingItems, onSelectedCard, onAddNewItem }) => {
+const ClothesSection = ({
+  clothingItems,
+  onSelectedCard,
+  onAddNewItem,
+  onCardLike,
+}) => {
   const currentUser = useContext(CurrentUserContext);
 
   const userItems = clothingItems.filter(
@@ -58,6 +63,7 @@ const ClothesSection = ({ clothingItems, onSelectedCard, onAddNewItem }) => {
               key={item._id}
               item={item}
               onSelectedCard={onSelectedCard}
+              onCardLike={onCardLike}
             />
           ))}
         </div>

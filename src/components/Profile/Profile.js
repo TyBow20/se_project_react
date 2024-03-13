@@ -26,6 +26,7 @@ const Profile = ({
   onSelectedCard,
   onAddNewItem,
   onSignOut,
+  onCardLike,
 }) => {
   return (
     <div className="profile">
@@ -34,6 +35,7 @@ const Profile = ({
         clothingItems={clothingItems}
         onSelectedCard={onSelectedCard}
         onAddNewItem={onAddNewItem}
+        onCardLike={onCardLike}
       />
     </div>
   );
