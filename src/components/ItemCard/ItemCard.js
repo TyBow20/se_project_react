@@ -15,39 +15,118 @@
 
 //refactor item card
 
+// import React, { useContext } from "react";
+// import "./ItemCard.css";
+// import heartIcon from "../../images/heart.svg";
+// import CurrentUserContext from "../../contexts/CurrentUserContext";
+
+// const ItemCard = ({ item, onSelectedCard, onCardLike }) => {
+//   const currentUser = useContext(CurrentUserContext);
+
+//   const handleLikeClick = (e) => {
+//     e.stopPropagation();
+//     onCardLike({ id: item._id, isLiked: !isLiked });
+//   };
+
+//   const isLiked =
+//     currentUser && item.likes.some((id) => id === currentUser._id);
+
+//   const itemLikeButtonClassName = `card__like-button ${
+//     isLiked ? "card__like-button_active" : ""
+//   }`;
+
+//   return (
+//     <div className="card__container" onClick={() => onSelectedCard(item)}>
+//       <div className="card__name">{item.name}</div>
+//       <div>
+//         <img src={item.imageUrl} className="card__image" alt={item.name} />
+//       </div>
+//       {currentUser && (
+//         <button className={itemLikeButtonClassName} onClick={handleLikeClick}>
+//           {/* Replace with a like icon or change as needed */}
+//           Like
+//         </button>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default ItemCard;
+
+// import React, { useContext } from "react";
+// import "./ItemCard.css";
+// import heartIcon from "../../images/heart.svg"; // Import the heart SVG
+// import CurrentUserContext from "../../contexts/CurrentUserContext";
+
+// const ItemCard = ({ item, onSelectedCard, onCardLike }) => {
+//   const currentUser = useContext(CurrentUserContext);
+
+//   const handleLikeClick = (e) => {
+//     e.stopPropagation();
+//     const isLiked =
+//       currentUser && item.likes.some((id) => id === currentUser._id);
+//     onCardLike({ id: item._id, isLiked: !isLiked });
+//   };
+
+//   const isLiked =
+//     currentUser && item.likes.some((id) => id === currentUser._id);
+
+//   const itemLikeButtonClassName = `card__like-button ${
+//     isLiked ? "card__like-button_active" : ""
+//   }`;
+
+//   return (
+//     <div className="card__container" onClick={() => onSelectedCard(item)}>
+//       <div className="card__details">
+//         <div className="card__name">{item.name}</div>
+//         {currentUser && (
+//           <button className={itemLikeButtonClassName} onClick={handleLikeClick}>
+//             <img
+//               src={heartIcon}
+//               alt={isLiked ? "Liked" : "Not liked"}
+//               className="card__like-icon"
+//             />
+//           </button>
+//         )}
+//       </div>
+//       <img src={item.imageUrl} className="card__image" alt={item.name} />
+//     </div>
+//   );
+// };
+
+// export default ItemCard;
+
 import React, { useContext } from "react";
 import "./ItemCard.css";
-import CurrentUserContext from "../../contexts/CurrentUserContext"; // Import the context
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import heartIcon from "../../images/heart.svg";
+import likedHeartIcon from "../../images/likedheart.svg";
 
 const ItemCard = ({ item, onSelectedCard, onCardLike }) => {
-  const currentUser = useContext(CurrentUserContext); // Use the context to get the current user
+  const currentUser = useContext(CurrentUserContext);
 
   const handleLikeClick = (e) => {
-    e.stopPropagation(); // Stop the click from propagating to the card container
+    e.stopPropagation();
+    const isLiked = item.likes && item.likes.includes(currentUser?._id);
     onCardLike({ id: item._id, isLiked: !isLiked });
   };
 
-  // Check if the item was liked by the current user
-  const isLiked =
-    currentUser && item.likes.some((id) => id === currentUser._id);
-
-  // Create a variable which you then set in `className` for the like button
-  const itemLikeButtonClassName = `card__like-button ${
-    isLiked ? "card__like-button_active" : ""
-  }`; // Adjust the class names as needed
+  const isLiked = item.likes && item.likes.includes(currentUser?._id);
 
   return (
     <div className="card__container" onClick={() => onSelectedCard(item)}>
-      <div className="card__name">{item.name}</div>
-      <div>
-        <img src={item.imageUrl} className="card__image" alt={item.name} />
+      <div className="card__info">
+        <span className="card__name">{item.name}</span>
+        {currentUser && (
+          <img
+            src={isLiked ? likedHeartIcon : heartIcon}
+            alt="Like"
+            className={`card__like ${isLiked ? "card__like_active" : ""}`}
+            onClick={handleLikeClick}
+          />
+        )}
       </div>
-      {currentUser && ( // Only render the like button if there is a logged-in user
-        <button className={itemLikeButtonClassName} onClick={handleLikeClick}>
-          {/* Replace with a like icon or change as needed */}
-          Like
-        </button>
-      )}
+      <img src={item.imageUrl} className="card__image" alt={item.name} />
     </div>
   );
 };

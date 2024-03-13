@@ -15,26 +15,47 @@
 
 //refactored code
 
-import SideBar from "../SideBar/SideBar";
-import ClothesSection from "../ClothesSection/ClothesSection";
-import "./SideBar.css";
+// import React from "react";
+// import "./SideBar.css";
+// import avatar from "../../images/avatar.svg"; // Ensure this path is correct
 
-const Profile = ({
-  clothingItems,
-  onSelectedCard,
-  onAddNewItem,
-  onSignOut,
-}) => {
+// const SideBar = ({ onSignOut }) => {
+//   return (
+//     <div className="side__bar">
+//       <img src={avatar} alt="User avatar" className="side__bar_avatar" />
+//       <p className="side__bar_name">Terrence Tegegne</p>
+//       <div>
+//         <button className="side__bar_signout" onClick={onSignOut}>
+//           Sign Out
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default SideBar;
+
+import React from "react";
+import "./SideBar.css";
+import avatar from "../../images/avatar.svg";
+
+const SideBar = ({ onSignOut, onEditProfile }) => {
   return (
-    <div className="profile">
-      <SideBar onSignOut={onSignOut} />
-      <ClothesSection
-        clothingItems={clothingItems}
-        onSelectedCard={onSelectedCard}
-        onAddNewItem={onAddNewItem}
-      />
+    <div className="side__bar">
+      <div className="side__bar-first">
+        <img src={avatar} alt="User avatar" className="side__bar_avatar" />
+        <p className="side__bar_name">Terrence Tegegne</p>
+      </div>
+      <div className="side__bar-second">
+        <button className="side__bar_edit-profile" onClick={onEditProfile}>
+          Change profile data
+        </button>
+        <button className="side__bar_signout" onClick={onSignOut}>
+          Log out
+        </button>
+      </div>
     </div>
   );
 };
 
-export default Profile;
+export default SideBar;

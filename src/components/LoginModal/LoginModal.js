@@ -63,14 +63,18 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
       onSubmit={handleSubmit}
     >
       {/* <form onSubmit={handleSubmit}> */}
+      <h3 className="modal__h3">Email</h3>
       <input
+        className="modal__text modal__name"
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
       />
+      <h3 className="modal__h3">Password</h3>
       <input
+        className="modal__text modal__name"
         type="password"
         placeholder="Password"
         value={password}

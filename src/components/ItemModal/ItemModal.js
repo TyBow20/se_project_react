@@ -37,7 +37,7 @@
 
 //refactored code
 import React, { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext"; // Correct this path as needed
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./ItemModal.css";
 
 const ItemModal = ({ selectedCard, onClose, onDelete }) => {
@@ -66,19 +66,21 @@ const ItemModal = ({ selectedCard, onClose, onDelete }) => {
           src={selectedCard.imageUrl}
           alt={selectedCard.name}
         />
-        <div className="modal__description">
-          <div>{selectedCard.name}</div>
-          <div>Weather: {selectedCard.weather}</div>
+        <div className="modal__combo">
+          <div className="modal__description">
+            <div>{selectedCard.name}</div>
+            <div>Weather: {selectedCard.weather}</div>
+          </div>
+          {isOwn && (
+            <button
+              className={itemDeleteButtonClassName}
+              type="button"
+              onClick={handleDelete}
+            >
+              Delete item
+            </button>
+          )}
         </div>
-        {isOwn && (
-          <button
-            className={itemDeleteButtonClassName}
-            type="button"
-            onClick={handleDelete}
-          >
-            Delete item
-          </button>
-        )}
       </div>
     </div>
   );

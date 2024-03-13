@@ -2,15 +2,61 @@
   display: flex;
   font-family: "Cabinet", sans-serif;
   gap: 20px;
-  align-items: center;
+  /* align-items: center; */
   justify-content: flex-start;
   width: 229px;
   height: 56px;
   font-size: 20px;
   font-weight: 700;
   padding-right: 116px;
+  flex-direction: column;
 }
 
 .side__bar_name {
   width: 157px;
+  margin: auto;
+}
+
+/* .side__bar_signout {
+  font-family: "Cabinet", sans-serif;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: #000000;
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 5px;
+} */
+
+.side__bar_signout,
+.side__bar_edit-profile {
+  font-family: "Cabinet", sans-serif;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: #000000;
+  font-size: 16px;
+  /* text-align: left; */
+  font-weight: 700;
+  /* margin-bottom: 5px; */
+  padding: 0;
+}
+
+.side__bar-second {
+  display: flex;
+  font-family: "Cabinet", sans-serif;
+  gap: 8px;
+  align-items: flex-start;
+  /* justify-content: flex-start; */
+  width: 229px;
+  height: 56px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24.8px;
+  flex-direction: column;
+}
+
+.side__bar-first {
+  display: flex;
+  font-family: "Cabinet", sans-serif;
 }

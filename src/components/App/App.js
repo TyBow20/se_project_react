@@ -31,8 +31,8 @@ function App() {
   // const [user, setCurrentUser] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  // const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+  // const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -114,6 +114,8 @@ function App() {
         });
     }
   }, []);
+
+  console.log("test");
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
@@ -246,6 +248,7 @@ function App() {
             onOpenSignInModal={handleOpenSignInModal}
             city={city}
             isLoggedIn={isLoggedIn}
+            onCreateModal={handleCreateModal}
           />
 
           <Switch>

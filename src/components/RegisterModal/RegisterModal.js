@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWIthForm";
 import { register } from "../../utils/auth";
+import "../ModalWithForm/ModalWithForm.css";
 
 const RegisterModal = ({ onClose, onRegister }) => {
   const [name, setName] = useState("");
@@ -30,33 +31,38 @@ const RegisterModal = ({ onClose, onRegister }) => {
     >
       {/* <form > */}
       <input
+        className="modal__text modal__name"
         type="text"
-        placeholder="Name"
+        placeholder="Name*"
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
       />
       <input
+        className="modal__text modal__name"
         type="email"
-        placeholder="Email"
+        placeholder="Email*"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
       />
       <input
+        className="modal__text modal__name"
         type="password"
-        placeholder="Password"
+        placeholder="Password*"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
       />
       <input
+        className="modal__text modal__name"
         type="text"
-        placeholder="Avatar URL"
+        placeholder="Avatar URL*"
         value={avatar}
         onChange={(e) => setAvatar(e.target.value)}
         required
       />
+
       {/* </form> */}
     </ModalWithForm>
   );
