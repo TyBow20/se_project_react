@@ -35,16 +35,19 @@
 
 // export default SideBar;
 
-import React from "react";
+import React, { useContext } from "react";
 import "./SideBar.css";
 import avatar from "../../images/avatar.svg";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const SideBar = ({ onSignOut, onEditProfile }) => {
+  const currentUser = useContext(CurrentUserContext);
+  const userName = currentUser ? currentUser.name : "No User";
   return (
     <div className="side__bar">
       <div className="side__bar-first">
         <img src={avatar} alt="User avatar" className="side__bar_avatar" />
-        <p className="side__bar_name">Terrence Tegegne</p>
+        <p className="side__bar_name">{currentUser.name}</p>
       </div>
       <div className="side__bar-second">
         <button className="side__bar_edit-profile" onClick={onEditProfile}>

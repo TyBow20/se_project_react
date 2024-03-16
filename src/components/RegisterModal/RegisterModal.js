@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ModalWithForm from "../ModalWithForm/ModalWIthForm";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { register } from "../../utils/auth";
 import "../ModalWithForm/ModalWithForm.css";
 

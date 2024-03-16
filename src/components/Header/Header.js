@@ -1,9 +1,19 @@
-import React from "react";
+// import React from "react";
+// import { Link } from "react-router-dom";
+// import "./Header.css";
+// import logo from "../../images/wtwr.svg";
+// import avatar from "../../images/avatar.svg";
+// import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+// import React, { useContext } from "react";
+// import CurrentUserContext from "../../contexts/CurrentUserContext";
+
+import React, { useContext } from "react"; // Combine the imports
 import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../images/wtwr.svg";
 import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const Header = ({
   onCreateModal,
@@ -13,6 +23,7 @@ const Header = ({
   onOpenSignInModal,
   onOpenSignUpModal,
 }) => {
+  const currentUser = useContext(CurrentUserContext);
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -57,7 +68,9 @@ const Header = ({
             </button>
             <Link to="/profile">
               {" "}
-              <div className="header__name">Terrence Tegegne</div>
+              <div className="header__name">
+                {currentUser?.name || "Your Name"}
+              </div>
             </Link>
             <img src={avatar} alt="avatar" />
           </>

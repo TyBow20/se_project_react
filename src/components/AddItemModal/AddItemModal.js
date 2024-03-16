@@ -1,5 +1,5 @@
 // import React, { useState } from "react";
-// import ModalWithForm from "../components/ModalWithForm/ModalWIthForm";
+// import ModalWithForm from "../components/ModalWithForm/ModalWithForm";
 
 // const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
 //   const [name, setName] = useState("");
@@ -84,7 +84,7 @@
 // export default AddItemModal;
 
 import React, { useState } from "react";
-import ModalWithForm from "../ModalWithForm/ModalWIthForm";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
   const [name, setName] = useState("");

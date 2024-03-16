@@ -19,6 +19,8 @@ import { register } from "../../utils/auth";
 import { login } from "../../utils/auth";
 import { checkToken } from "../../utils/auth";
 import { addCardLike, removeCardLike } from "../../utils/api";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import { updateUserProfile } from "../../utils/api";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -36,6 +38,10 @@ function App() {
 
   const handleCreateModal = () => {
     setActiveModal("create");
+  };
+
+  const handleEditProfileModal = () => {
+    setActiveModal("editProfile");
   };
 
   const handleCloseModal = () => {
@@ -196,6 +202,34 @@ function App() {
     }
   };
 
+  // const handleEditProfileSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const token = localStorage.getItem("jwt");
+  //   try {
+  //     const updatedUser = await updateUserProfile({ name, avatar }, token);
+  //     onUpdateUser(updatedUser);
+  //     onClose();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  const onUpdateUser = (updatedUser) => {
+    setCurrentUser(updatedUser);
+    // Close the modal if you wish to do so here, or handle elsewhere
+  };
+
+  const handleEditProfileSubmit = async (name, avatar) => {
+    const token = localStorage.getItem("jwt");
+    try {
+      const updatedUser = await updateUserProfile({ name, avatar }, token);
+      setCurrentUser(updatedUser);
+      handleCloseModal();
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
+
   const handleLogin = async (email, password) => {
     try {
       const res = await login(email, password);
@@ -268,6 +302,7 @@ function App() {
                 onAddNewItem={handleOpenCreateModal}
                 onSignOut={onSignOut}
                 onCardLike={handleCardLike}
+                onEditProfile={handleEditProfileModal}
               />
             </Route>
           </Switch>
@@ -292,6 +327,21 @@ function App() {
             <RegisterModal
               onClose={handleCloseSignUpModal}
               onRegister={handleRegister}
+            />
+          )}
+          {/* {activeModal === "editProfile" && (
+            <EditProfileModal
+              onClose={handleCloseSignUpModal}
+              onRegister={handleRegister}
+              onSubmit={handleEditProfileSubmit}
+            />
+          )} */}
+          {activeModal === "editProfile" && (
+            <EditProfileModal
+              isOpen={activeModal === "editProfile"}
+              onClose={() => setActiveModal("")}
+              onUpdateUser={onUpdateUser}
+              setCurrentUser={setCurrentUser}
             />
           )}
           {/* Login Modal */}
