@@ -7,7 +7,7 @@
 // import React, { useContext } from "react";
 // import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-import React, { useContext } from "react"; // Combine the imports
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../images/wtwr.svg";
@@ -40,7 +40,7 @@ const Header = ({
       </div>
       <div className="header__avatar-logo">
         <ToggleSwitch />
-        {!isLoggedIn ? (
+        {!currentUser ? (
           <>
             <button
               className="header__newclothes"
@@ -72,7 +72,11 @@ const Header = ({
                 {currentUser?.name || "Your Name"}
               </div>
             </Link>
-            <img src={avatar} alt="avatar" />
+            <img
+              src={currentUser.avatar}
+              alt="avatar"
+              className="header__profile-pic"
+            />
           </>
         )}
       </div>

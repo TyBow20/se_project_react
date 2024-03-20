@@ -36,26 +36,37 @@
 // export default SideBar;
 
 import React, { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./SideBar.css";
 import avatar from "../../images/avatar.svg";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const SideBar = ({ onSignOut, onEditProfile }) => {
   const currentUser = useContext(CurrentUserContext);
+
   const userName = currentUser ? currentUser.name : "No User";
+
   return (
     <div className="side__bar">
       <div className="side__bar-first">
-        <img src={avatar} alt="User avatar" className="side__bar_avatar" />
-        <p className="side__bar_name">{currentUser.name}</p>
+        <img
+          src={currentUser?.avatar}
+          alt="User avatar"
+          className="side__bar_avatar"
+        />
+        <p className="side__bar_name">{userName}</p>{" "}
+        {/* Use the userName variable here */}
       </div>
       <div className="side__bar-second">
-        <button className="side__bar_edit-profile" onClick={onEditProfile}>
-          Change profile data
-        </button>
-        <button className="side__bar_signout" onClick={onSignOut}>
-          Log out
-        </button>
+        {currentUser && (
+          <>
+            <button className="side__bar_edit-profile" onClick={onEditProfile}>
+              Change profile data
+            </button>
+            <button className="side__bar_signout" onClick={onSignOut}>
+              Log out
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

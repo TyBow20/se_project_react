@@ -30,6 +30,7 @@ const RegisterModal = ({ onClose, onRegister }) => {
       buttonText="Sign Up"
     >
       {/* <form > */}
+      <b>Name *</b>
       <input
         className="modal__text modal__name"
         type="text"
@@ -38,6 +39,7 @@ const RegisterModal = ({ onClose, onRegister }) => {
         onChange={(e) => setName(e.target.value)}
         required
       />
+      <b>Email *</b>
       <input
         className="modal__text modal__name"
         type="email"
@@ -46,6 +48,7 @@ const RegisterModal = ({ onClose, onRegister }) => {
         onChange={(e) => setEmail(e.target.value)}
         required
       />
+      <b>Password *</b>
       <input
         className="modal__text modal__name"
         type="password"
@@ -54,6 +57,7 @@ const RegisterModal = ({ onClose, onRegister }) => {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
+      <b>Avatar URL *</b>
       <input
         className="modal__text modal__name"
         type="text"
@@ -62,7 +66,9 @@ const RegisterModal = ({ onClose, onRegister }) => {
         onChange={(e) => setAvatar(e.target.value)}
         required
       />
-
+      <button className="modal__garment" type="submit">
+        Sign Up
+      </button>
       {/* </form> */}
     </ModalWithForm>
   );

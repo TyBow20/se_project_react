@@ -48,12 +48,14 @@ import React, { useState, useContext, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { updateUserProfile } from "../../utils/api";
+import "./EditProfileModal.css";
 
 const EditProfileModal = ({
   isOpen,
   onClose,
   onUpdateUser,
   setCurrentUser,
+  buttonText = "Save changes",
 }) => {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState("");
@@ -76,33 +78,44 @@ const EditProfileModal = ({
 
     try {
       const updatedUser = await updateUserProfile({ name, avatar }, token);
-
-      setCurrentUser(updatedUser);
-      onClose(); // Close the modal
+      onUpdateUser(updatedUser);
+      // setCurrentUser(updatedUser);
+      onClose();
     } catch (error) {
       console.error("Failed to update user profile:", error);
     }
   };
 
   return (
-    <ModalWithForm isOpen={isOpen} onClose={onClose} title="Edit Profile">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Avatar URL"
-          value={avatar}
-          onChange={(e) => setAvatar(e.target.value)}
-          required
-        />
-        <button type="submit">Save changes</button>
-      </form>
+    <ModalWithForm
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      title="Edit Profile"
+    >
+      {/* <form onSubmit={handleSubmit}> */}
+      <b>Name *</b>
+      <input
+        className="edit__profile-input"
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
+      <b>Avatar *</b>
+      <input
+        className="edit__profile-avatar"
+        type="text"
+        placeholder="Avatar URL"
+        value={avatar}
+        onChange={(e) => setAvatar(e.target.value)}
+        required
+      />
+      <button className="edit__profile-button" type="submit">
+        {buttonText}
+      </button>
+      {/* </form> */}
     </ModalWithForm>
   );
 };

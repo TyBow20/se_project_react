@@ -336,12 +336,22 @@ function App() {
               onSubmit={handleEditProfileSubmit}
             />
           )} */}
-          {activeModal === "editProfile" && (
+          {/* {activeModal === "editProfile" && (
             <EditProfileModal
               isOpen={activeModal === "editProfile"}
               onClose={() => setActiveModal("")}
               onUpdateUser={onUpdateUser}
               setCurrentUser={setCurrentUser}
+            />
+          )} */}
+          {activeModal === "editProfile" && (
+            <EditProfileModal
+              isOpen={activeModal === "editProfile"}
+              onClose={() => setActiveModal("")}
+              onUpdateUser={(updatedUser) => {
+                setCurrentUser(updatedUser);
+                handleCloseModal();
+              }}
             />
           )}
           {/* Login Modal */}

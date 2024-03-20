@@ -56,10 +56,10 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
 
   return (
     <ModalWithForm
-      title="Login"
+      title="Log In"
       isOpen={isOpen}
       onClose={onClose}
-      buttonText={"Login"}
+      // buttonText={"Login"}
       onSubmit={handleSubmit}
     >
       {/* <form onSubmit={handleSubmit}> */}
@@ -82,6 +82,9 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
         required
       />
       {/* </form> */}
+      <button className="modal__garment" type="submit">
+        Log In
+      </button>
     </ModalWithForm>
   );
 };

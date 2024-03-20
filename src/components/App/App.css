@@ -5,7 +5,8 @@
   flex-direction: column;
   margin-bottom: 1rem;
   width: 440px;
-  height: 52px;
+  margin-bottom: 24px;
+  /* height: 52px; */
 }
 
 .modal__text {
