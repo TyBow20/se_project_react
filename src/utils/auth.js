@@ -1,18 +1,27 @@
+import { request } from "./api";
 const API_BASE_URL = "http://localhost:3001";
 
-export const register = async (name, email, password, avatar) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/signup`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password, avatar }),
-    });
-    if (!response.ok) throw new Error("Registration failed");
-    return await response.json();
-  } catch (error) {
-    console.error("Registration Error:", error);
-    throw error;
-  }
+// export const register = async (name, email, password, avatar) => {
+//   try {
+//     const response = await fetch(`${API_BASE_URL}/signup`, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ name, email, password, avatar }),
+//     });
+//     if (!response.ok) throw new Error("Registration failed");
+//     return await response.json();
+//   } catch (error) {
+//     console.error("Registration Error:", error);
+//     throw error;
+//   }
+// };
+
+export const register = (name, email, password, avatar) => {
+  return request(`${API_BASE_URL}/signup`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, password, avatar }),
+  });
 };
 
 export const login = async (email, password) => {

@@ -106,30 +106,46 @@ function App() {
       });
   }, []);
 
+  // useEffect(() => {
+  //   const token = localStorage.getItem("jwt");
+  //   if (token) {
+  //     checkToken(token)
+  //       .then((userData) => {
+  //         setIsLoggedIn(true);
+  //         setCurrentUser(userData);
+  //       })
+  //       .catch((error) => {
+  //         localStorage.removeItem("jwt");
+  //         console.error(error);
+  //       });
+  //   }
+  // }, []);
+
+  // console.log("test");
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("jwt");
+  //   if (token) {
+  //     checkToken(token)
+  //       .then((userData) => {
+  //         // setIsLoggedIn(true);
+  //         setCurrentUser(userData);
+  //         setIsLoggedIn(true);
+  //         setCurrentUser(userData);
+  //       })
+  //       .catch((error) => {
+  //         setIsLoggedIn(false);
+  //         localStorage.removeItem("jwt");
+  //         console.error(error);
+  //       });
+  //   }
+  // }, []);
+
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
       checkToken(token)
         .then((userData) => {
-          setIsLoggedIn(true);
-          setCurrentUser(userData);
-        })
-        .catch((error) => {
-          localStorage.removeItem("jwt");
-          console.error(error);
-        });
-    }
-  }, []);
-
-  console.log("test");
-
-  useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      checkToken(token)
-        .then((userData) => {
-          setIsLoggedIn(true);
-          setCurrentUser(userData);
           setIsLoggedIn(true);
           setCurrentUser(userData);
         })
@@ -140,6 +156,8 @@ function App() {
         });
     }
   }, []);
+
+  console.log("test");
 
   const handleDeleteItem = async (itemId) => {
     try {
@@ -181,13 +199,13 @@ function App() {
   };
 
   // Handlers for closing the modals
-  const handleCloseSignUpModal = () => {
-    setActiveModal("");
-  };
+  // const handleCloseSignUpModal = () => {
+  //   setActiveModal("");
+  // };
 
-  const handleCloseSignInModal = () => {
-    setActiveModal("");
-  };
+  // const handleCloseSignInModal = () => {
+  //   setActiveModal("");
+  // };
 
   // new code
 
@@ -201,6 +219,17 @@ function App() {
       console.error("Registration failed:", error);
     }
   };
+
+  // const handleRegister = async (name, email, password, avatar) => {
+  //   try {
+  //     const userData = await register(name, email, password, avatar);
+  //     setCurrentUser(userData);
+  //     setIsLoggedIn(true);
+  //     handleCloseModal();
+  //   } catch (error) {
+  //     console.error("Registration failed:", error);
+  //   }
+  // };
 
   // const handleEditProfileSubmit = async (event) => {
   //   event.preventDefault();
@@ -216,19 +245,18 @@ function App() {
 
   const onUpdateUser = (updatedUser) => {
     setCurrentUser(updatedUser);
-    // Close the modal if you wish to do so here, or handle elsewhere
   };
 
-  const handleEditProfileSubmit = async (name, avatar) => {
-    const token = localStorage.getItem("jwt");
-    try {
-      const updatedUser = await updateUserProfile({ name, avatar }, token);
-      setCurrentUser(updatedUser);
-      handleCloseModal();
-    } catch (error) {
-      console.error("Error updating profile:", error);
-    }
-  };
+  // const handleEditProfileSubmit = async (name, avatar) => {
+  //   const token = localStorage.getItem("jwt");
+  //   try {
+  //     const updatedUser = await updateUserProfile({ name, avatar }, token);
+  //     setCurrentUser(updatedUser);
+  //     handleCloseModal();
+  //   } catch (error) {
+  //     console.error("Error updating profile:", error);
+  //   }
+  // };
 
   const handleLogin = async (email, password) => {
     try {
@@ -325,7 +353,7 @@ function App() {
           {/* Register Modal */}
           {activeModal === "register" && (
             <RegisterModal
-              onClose={handleCloseSignUpModal}
+              onClose={handleCloseModal}
               onRegister={handleRegister}
             />
           )}
@@ -344,7 +372,7 @@ function App() {
               setCurrentUser={setCurrentUser}
             />
           )} */}
-          {activeModal === "editProfile" && (
+          {/* {activeModal === "editProfile" && (
             <EditProfileModal
               isOpen={activeModal === "editProfile"}
               onClose={() => setActiveModal("")}
@@ -353,13 +381,20 @@ function App() {
                 handleCloseModal();
               }}
             />
+          )} */}
+          {activeModal === "editProfile" && (
+            <EditProfileModal
+              isOpen={activeModal === "editProfile"}
+              onClose={handleCloseModal}
+              onUpdateUser={(updatedUser) => {
+                setCurrentUser(updatedUser);
+                handleCloseModal();
+              }}
+            />
           )}
           {/* Login Modal */}
           {activeModal === "login" && (
-            <LoginModal
-              onClose={handleCloseSignInModal}
-              onLogin={handleLogin}
-            />
+            <LoginModal onClose={handleCloseModal} onLogin={handleLogin} />
           )}
         </CurrentTemperatureUnitContext.Provider>
       </div>

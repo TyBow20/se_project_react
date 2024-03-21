@@ -93,29 +93,35 @@ const EditProfileModal = ({
       onSubmit={handleSubmit}
       title="Edit Profile"
     >
-      {/* <form onSubmit={handleSubmit}> */}
-      <b>Name *</b>
-      <input
-        className="edit__profile-input"
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-      <b>Avatar *</b>
-      <input
-        className="edit__profile-avatar"
-        type="text"
-        placeholder="Avatar URL"
-        value={avatar}
-        onChange={(e) => setAvatar(e.target.value)}
-        required
-      />
+      <label htmlFor="name-input" className="edit__profile-label">
+        Name *
+        <input
+          id="name-input"
+          className="edit__profile-input"
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </label>
+
+      <label htmlFor="avatar-input" className="edit__profile-label">
+        Avatar *
+        <input
+          id="avatar-input"
+          className="edit__profile-avatar"
+          type="text"
+          placeholder="Avatar URL"
+          value={avatar}
+          onChange={(e) => setAvatar(e.target.value)}
+          required
+        />
+      </label>
+
       <button className="edit__profile-button" type="submit">
         {buttonText}
       </button>
-      {/* </form> */}
     </ModalWithForm>
   );
 };
