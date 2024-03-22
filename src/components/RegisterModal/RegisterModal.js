@@ -11,14 +11,7 @@ const RegisterModal = ({ onClose, onRegister }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      onRegister(name, email, password, avatar);
-      onClose();
-      // Handle successful registration (e.g., redirect to profile page)
-    } catch (error) {
-      console.error(error);
-      // Handle registration errors (e.g., displaying error messages)
-    }
+    onRegister(name, email, password, avatar);
   };
 
   return (

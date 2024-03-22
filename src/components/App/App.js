@@ -7,6 +7,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { defaultClothingItems } from "../../utils/contants";
 import { Route, Switch } from "react-router-dom";
@@ -106,41 +107,6 @@ function App() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("jwt");
-  //   if (token) {
-  //     checkToken(token)
-  //       .then((userData) => {
-  //         setIsLoggedIn(true);
-  //         setCurrentUser(userData);
-  //       })
-  //       .catch((error) => {
-  //         localStorage.removeItem("jwt");
-  //         console.error(error);
-  //       });
-  //   }
-  // }, []);
-
-  // console.log("test");
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("jwt");
-  //   if (token) {
-  //     checkToken(token)
-  //       .then((userData) => {
-  //         // setIsLoggedIn(true);
-  //         setCurrentUser(userData);
-  //         setIsLoggedIn(true);
-  //         setCurrentUser(userData);
-  //       })
-  //       .catch((error) => {
-  //         setIsLoggedIn(false);
-  //         localStorage.removeItem("jwt");
-  //         console.error(error);
-  //       });
-  //   }
-  // }, []);
-
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     if (token) {
@@ -156,8 +122,6 @@ function App() {
         });
     }
   }, []);
-
-  console.log("test");
 
   const handleDeleteItem = async (itemId) => {
     try {
@@ -220,44 +184,6 @@ function App() {
     }
   };
 
-  // const handleRegister = async (name, email, password, avatar) => {
-  //   try {
-  //     const userData = await register(name, email, password, avatar);
-  //     setCurrentUser(userData);
-  //     setIsLoggedIn(true);
-  //     handleCloseModal();
-  //   } catch (error) {
-  //     console.error("Registration failed:", error);
-  //   }
-  // };
-
-  // const handleEditProfileSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const token = localStorage.getItem("jwt");
-  //   try {
-  //     const updatedUser = await updateUserProfile({ name, avatar }, token);
-  //     onUpdateUser(updatedUser);
-  //     onClose();
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  const onUpdateUser = (updatedUser) => {
-    setCurrentUser(updatedUser);
-  };
-
-  // const handleEditProfileSubmit = async (name, avatar) => {
-  //   const token = localStorage.getItem("jwt");
-  //   try {
-  //     const updatedUser = await updateUserProfile({ name, avatar }, token);
-  //     setCurrentUser(updatedUser);
-  //     handleCloseModal();
-  //   } catch (error) {
-  //     console.error("Error updating profile:", error);
-  //   }
-  // };
-
   const handleLogin = async (email, password) => {
     try {
       const res = await login(email, password);
@@ -297,6 +223,22 @@ function App() {
     setCurrentUser(null);
   };
 
+  const handleUpdateUserProfile = async (userData) => {
+    const token = localStorage.getItem("jwt");
+    if (!token) {
+      console.error("No token found");
+      return;
+    }
+
+    try {
+      const updatedUser = await updateUserProfile(userData, token);
+      setCurrentUser(updatedUser);
+      handleCloseModal();
+    } catch (error) {
+      console.error("Failed to update user profile:", error);
+    }
+  };
+
   //end new code
 
   return (
@@ -323,7 +265,7 @@ function App() {
                 onCardLike={handleCardLike}
               />
             </Route>
-            <Route path="/profile">
+            {/* <Route path="/profile">
               <Profile
                 clothingItems={clothingItems}
                 onSelectedCard={handleSelectedCard}
@@ -332,7 +274,17 @@ function App() {
                 onCardLike={handleCardLike}
                 onEditProfile={handleEditProfileModal}
               />
-            </Route>
+            </Route> */}
+            <ProtectedRoute path="/profile">
+              <Profile
+                clothingItems={clothingItems}
+                onSelectedCard={handleSelectedCard}
+                onAddNewItem={handleOpenCreateModal}
+                onSignOut={onSignOut}
+                onCardLike={handleCardLike}
+                onEditProfile={handleEditProfileModal}
+              />
+            </ProtectedRoute>
           </Switch>
 
           <Footer />
@@ -386,12 +338,16 @@ function App() {
             <EditProfileModal
               isOpen={activeModal === "editProfile"}
               onClose={handleCloseModal}
-              onUpdateUser={(updatedUser) => {
-                setCurrentUser(updatedUser);
-                handleCloseModal();
-              }}
+              onUpdateUser={handleUpdateUserProfile}
             />
           )}
+          {/* {activeModal === "editProfile" && (
+            <EditProfileModal
+              isOpen={activeModal === "editProfile"}
+              onClose={handleCloseModal}
+              onUpdateUser={handleUpdateUserProfile}
+            />
+          )} */}
           {/* Login Modal */}
           {activeModal === "login" && (
             <LoginModal onClose={handleCloseModal} onLogin={handleLogin} />
@@ -403,70 +359,3 @@ function App() {
 }
 
 export default App;
-
-//   return (
-//     <CurrentUserContext.Provider value={currentUser}>
-//       <div className="center">
-//         <CurrentTemperatureUnitContext.Provider
-//           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-//         >
-//           <Header
-//             onCreateModal={handleCreateModal}
-//             city={city}
-//             isLoggedIn={isLoggedIn}
-//           />
-
-//           <Switch>
-//             <Route exact path="/">
-//               <Main
-//                 weatherTemp={temp}
-//                 onSelectedCard={handleSelectedCard}
-//                 clothingItems={clothingItems}
-//                 onAddNewItem={handleOpenCreateModal}
-//               />
-//             </Route>
-//             <Route path="/profile">
-//               <Profile
-//                 clothingItems={clothingItems}
-//                 onSelectedCard={handleSelectedCard}
-//                 onAddNewItem={handleOpenCreateModal}
-//               />
-//             </Route>
-//           </Switch>
-
-//           <Footer />
-//           {activeModal === "create" && (
-//             <AddItemModal
-//               handleCloseModal={handleCloseModal}
-//               isOpen={activeModal === "create"}
-//               onAddItem={handleAddItem}
-//             />
-//           )}
-//           {activeModal === "preview" && (
-//             <ItemModal
-//               selectedCard={selectedCard}
-//               onClose={handleCloseModal}
-//               onDelete={handleDeleteItem}
-//             />
-//           )}
-//           {activeModal === "register" && (
-//             <RegisterModal
-//               isOpen={activeModal === "register"}
-//               onClose={handleCloseModal}
-//               onRegister={handleRegister}
-//             />
-//           )}
-//           {activeModal === "login" && (
-//             <LoginModal
-//               isOpen={activeModal === "login"}
-//               onClose={handleCloseModal}
-//               onLogin={handleLogin}
-//             />
-//           )}
-//         </CurrentTemperatureUnitContext.Provider>
-//       </div>
-//     </CurrentUserContext.Provider>
-//   );
-// }
-
-// export default App;
