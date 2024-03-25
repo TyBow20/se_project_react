@@ -54,6 +54,14 @@ function App() {
     setSelectedCard(card);
   };
 
+  const switchToSignUp = () => {
+    setActiveModal("register");
+  };
+
+  const switchToLogin = () => {
+    setActiveModal("login");
+  };
+
   useEffect(() => {
     const handleOutsideClick = (e) => {
       // console.log(modalRef.current, e.target);
@@ -162,15 +170,6 @@ function App() {
     setActiveModal("login");
   };
 
-  // Handlers for closing the modals
-  // const handleCloseSignUpModal = () => {
-  //   setActiveModal("");
-  // };
-
-  // const handleCloseSignInModal = () => {
-  //   setActiveModal("");
-  // };
-
   // new code
 
   const handleRegister = async (name, email, password, avatar) => {
@@ -185,6 +184,7 @@ function App() {
   };
 
   const handleLogin = async (email, password) => {
+    console.log("hello");
     try {
       const res = await login(email, password);
 
@@ -307,33 +307,10 @@ function App() {
             <RegisterModal
               onClose={handleCloseModal}
               onRegister={handleRegister}
+              onLogin={switchToLogin}
             />
           )}
-          {/* {activeModal === "editProfile" && (
-            <EditProfileModal
-              onClose={handleCloseSignUpModal}
-              onRegister={handleRegister}
-              onSubmit={handleEditProfileSubmit}
-            />
-          )} */}
-          {/* {activeModal === "editProfile" && (
-            <EditProfileModal
-              isOpen={activeModal === "editProfile"}
-              onClose={() => setActiveModal("")}
-              onUpdateUser={onUpdateUser}
-              setCurrentUser={setCurrentUser}
-            />
-          )} */}
-          {/* {activeModal === "editProfile" && (
-            <EditProfileModal
-              isOpen={activeModal === "editProfile"}
-              onClose={() => setActiveModal("")}
-              onUpdateUser={(updatedUser) => {
-                setCurrentUser(updatedUser);
-                handleCloseModal();
-              }}
-            />
-          )} */}
+
           {activeModal === "editProfile" && (
             <EditProfileModal
               isOpen={activeModal === "editProfile"}
@@ -341,16 +318,14 @@ function App() {
               onUpdateUser={handleUpdateUserProfile}
             />
           )}
-          {/* {activeModal === "editProfile" && (
-            <EditProfileModal
-              isOpen={activeModal === "editProfile"}
-              onClose={handleCloseModal}
-              onUpdateUser={handleUpdateUserProfile}
-            />
-          )} */}
+
           {/* Login Modal */}
           {activeModal === "login" && (
-            <LoginModal onClose={handleCloseModal} onLogin={handleLogin} />
+            <LoginModal
+              onClose={handleCloseModal}
+              onLogin={handleLogin}
+              onSignUp={switchToSignUp}
+            />
           )}
         </CurrentTemperatureUnitContext.Provider>
       </div>

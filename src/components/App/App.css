@@ -43,6 +43,20 @@
   font-size: 34px;
 }
 
+.modal__button {
+  height: 36px;
+  width: 75px;
+  border-radius: 4px;
+  font-family: "Cabinet", sans-serif;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
+
+.modal__label {
+  font-weight: 700;
+}
+
 .modal__radio {
   display: flex;
   flex-direction: column;
