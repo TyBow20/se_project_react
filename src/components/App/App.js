@@ -307,7 +307,7 @@ function App() {
             <RegisterModal
               onClose={handleCloseModal}
               onRegister={handleRegister}
-              onLogin={switchToLogin}
+              switchToLogin={switchToLogin}
             />
           )}
 
@@ -324,7 +324,7 @@ function App() {
             <LoginModal
               onClose={handleCloseModal}
               onLogin={handleLogin}
-              onSignUp={switchToSignUp}
+              switchToSignUp={switchToSignUp}
             />
           )}
         </CurrentTemperatureUnitContext.Provider>
