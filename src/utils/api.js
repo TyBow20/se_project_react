@@ -7,10 +7,6 @@ function checkResponse(response) {
   return response.json();
 }
 
-// export function request(url, options) {
-//   return fetch(url, options).then(checkResponse);
-// }
-
 export async function request(url, options) {
   const response = await fetch(url, options);
   if (!response.ok) {
