@@ -129,7 +129,7 @@ function App() {
           console.error(error);
         });
     }
-  }, []);
+  }, [isLoggedIn]);
 
   const handleDeleteItem = async (itemId) => {
     try {
