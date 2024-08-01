@@ -44,7 +44,11 @@
 //refactored
 
 import { request } from "./api";
-const API_BASE_URL = "http://localhost:3001";
+// const API_BASE_URL = "http://localhost:3001";
+const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwrw.jumpingcrab.com"
+    : "http://localhost:3001";
 
 export const register = (name, email, password, avatar) => {
   return request(`${API_BASE_URL}/signup`, {
